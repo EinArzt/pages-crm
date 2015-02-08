@@ -1,0 +1,46 @@
+
+<div class="jumbotron" data-pages="parallax">
+  <div class="container-fluid container-fixed-lg sm-p-l-20 sm-p-r-20">
+    <div class="inner">
+      <!-- START BREADCRUMB -->
+      <ul class="breadcrumb">
+        <li>
+          <p>Pages</p>
+        </li>
+        <li><a href="#" class="active">Alle Kunden</a>
+        </li>
+      </ul>
+      <!-- END BREADCRUMB -->
+    </div>
+  </div>
+</div>
+<!-- END JUMBOTRON -->
+
+<!-- START CONTAINER FLUID -->
+<div class="container-fluid container-fixed-lg">
+  <!-- BEGIN PlACE PAGE CONTENT HERE -->
+  <table class="table table-hover" st-table="displayedClients" st-safe-src="clients">
+    <thead>
+      <tr>
+        <th class="sorting" st-sort="'name'">Name</th>
+        <th class="sorting" st-sort="'address'">Adresse</th>
+      </tr>
+      <tr>
+        <th>
+          <input st-search="name" placeholder="Suchen nach Name..." class="input-sm form-control" type="search"/>
+        </th>
+        <th>
+          <input st-search="address" placeholder="Suchen nach Adresse..." class="input-sm form-control" type="search"/>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="client in clients">
+        <td><a href="#">{{ client.name }} {{ client.lastName }}</a></td>
+          <td>{{ client.address }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- END PLACE PAGE CONTENT HERE -->
+</div>
+<!-- END CONTAINER FLUID -->
