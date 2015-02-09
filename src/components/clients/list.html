@@ -19,27 +19,29 @@
 <!-- START CONTAINER FLUID -->
 <div class="container-fluid container-fixed-lg">
   <!-- BEGIN PlACE PAGE CONTENT HERE -->
-  <table class="table table-hover" st-table="displayedClients" st-safe-src="clients">
+  <table class="table table-hover">
     <thead>
       <tr>
-        <th class="sorting" st-sort="'name'">Name</th>
-        <th class="sorting" st-sort="'address'">Adresse</th>
+        <th class="sorting" style="width: 30%;">Name</th>
+        <th class="sorting" style="width: 70%;">Adresse</th>
       </tr>
       <tr>
-        <th>
-          <input st-search="name" placeholder="Suchen nach Name..." class="input-sm form-control" type="search"/>
-        </th>
-        <th>
-          <input st-search="address" placeholder="Suchen nach Adresse..." class="input-sm form-control" type="search"/>
+        <th colspan="10">
+          <input ng-model="client.search" placeholder="Suchen..." class="input-sm form-control" type="search" autofocus />
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="client in clients">
-        <td><a href="#">{{ client.name }} {{ client.lastName }}</a></td>
-          <td>{{ client.address }}</td>
+    <a >
+      <tr ng-repeat="client in clients | filter: client.search | orderBy: 'name'">
+        <td>{{ client.name }} {{ client.lastName }}</td>
+        <td>{{ client.address }}</td>
       </tr>
+    </a>
     </tbody>
+    <tfoot>
+
+    </tfoot>
   </table>
   <!-- END PLACE PAGE CONTENT HERE -->
 </div>

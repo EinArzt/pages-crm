@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pages', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'restangular', 'ui.router', 'smart-table', 'clients'])
+angular.module('pages', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'restangular', 'ui.router', 'ui.bootstrap', 'clients' ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('home', {
