@@ -3,12 +3,12 @@
 angular.module('pages', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'restangular', 'ui.router', 'ui.bootstrap', 'clients' ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('home', {
+      .state('base', {
         url: '/',
-        templateUrl: 'app/main/main.html',
+        templateUrl: 'components/base/base.html',
         controller: 'MainCtrl'
       })
-      .state('clients', {
+      .state('base.clients', {
         url: '/clients',
         templateUrl: 'components/clients/list.html',
         controller: 'ClientsCtrl'
