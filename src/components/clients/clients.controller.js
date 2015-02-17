@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module('clients', [ 'clientModals' ])
+angular.module('clients', [ ])
   .controller('ClientsCtrl', function ($scope) {
     $scope.date = new Date();
 

@@ -22,26 +22,21 @@
   <table class="table table-hover">
     <thead>
       <tr>
-        <th class="sorting" style="width: 30%;">Name</th>
-        <th class="sorting" style="width: 70%;">Adresse</th>
+        <th class="sorting">Name</th>
+        <th class="sorting">Adresse</th>
       </tr>
       <tr>
         <th colspan="10">
-          <input ng-model="client.search" placeholder="Suchen..." class="input-sm form-control" type="search" autofocus />
+          <input placeholder="Suchen..." class="input-sm form-control" type="search" ng-model="clients.search" />
         </th>
       </tr>
     </thead>
     <tbody>
-    <a >
-      <tr ng-repeat="client in clients | filter: client.search | orderBy: 'name'">
-        <td>{{ client.name }} {{ client.lastName }}</td>
+      <tr ng-repeat="client in clients | filter: clients.search">
+        <td><a href="#">{{ client.name }} {{ client.lastName }}</a></td>
         <td>{{ client.address }}</td>
       </tr>
-    </a>
     </tbody>
-    <tfoot>
-
-    </tfoot>
   </table>
   <!-- END PLACE PAGE CONTENT HERE -->
 </div>
