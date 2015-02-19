@@ -1,12 +1,16 @@
 'use strict';
 
-angular.module('pages', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'restangular', 'ui.router', 'clients'])
+angular.module('pages', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'restangular', 'ui.router', 'ui.bootstrap', 'clients', 'directives', 'factories', 'clientModals'])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('base', {
+      .state('index', {
         url: '/',
-        templateUrl: 'components/base/base.html',
+        template: 'Index Seite',
         controller: 'MainCtrl'
+      })
+      .state('base', {
+        abstract: true,
+        templateUrl: 'components/base/base.html',
       })
       .state('base.clients', {
         url: '/clients',
@@ -14,6 +18,5 @@ angular.module('pages', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'res
         controller: 'ClientsCtrl'
       });
 
-    $urlRouterProvider.otherwise('/');
-  })
-;
+    $urlRouterProvider.otherwise('/404');
+  });

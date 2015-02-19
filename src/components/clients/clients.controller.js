@@ -89,5 +89,4 @@ angular.module('clients', [ ])
         "registered": "Friday, March 28, 2014 5:47 AM"
       }
     ];
-    $scope.displayedClients = angular.copy($scope.clients);
   });

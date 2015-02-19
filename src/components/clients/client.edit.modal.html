@@ -1,0 +1,47 @@
+<div class="modal-header clearfix text-left">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+    <i class="pg-close fs-14"></i>
+  </button>
+  <h5>{{ origClient.name }} {{ origClient.lastName }} <span class="semi-bold">bearbeiten</span></h5>
+  <p>Hier können sie den Kunden {{ origClient.name }} {{ origClient.lastName }} bearbeiten.</p>
+</div>
+<div class="modal-body">
+  <form class="form-default" role="form">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group form-group-default">
+          <label>Vorname</label>
+          <input ng-model="client.name" type="text" class="form-control" >
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group form-group-default">
+          <label>Nachname</label>
+          <input ng-model="client.lastName" type="text" class="form-control" >
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="form-group">
+          <label>Card Number</label>
+          <input type="text" class="form-control" >
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label>Card Holder</label>
+          <input type="text" class="form-control" >
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="modal-footer no-padding">
+    <button type="button" class="btn" ng-click="close()">
+      Abbrechen
+    </button>
+    <button type="button" class="btn btn-primary btn-lg" ng-click="save()">
+      Speichern
+    </button>
+  </div>
+</div>
