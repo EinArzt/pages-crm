@@ -1,0 +1,71 @@
+<div class="modal-header clearfix text-left">
+  <button type="button" class="close" ng-click="close()" aria-hidden="true">
+    <i class="pg-close fs-14"></i>
+  </button>
+  <h5>Neuer <span class="semi-bold">Kunde</span></h5>
+  <p>Hier können sie einen neuen Kunden anlegen.</p>
+</div>
+<form class="form-default" role="form" ng-submit="save()">
+  <div class="modal-body">
+    <div class="form-group-attached">
+      <div class="row">
+        <div class="col-sm-2">
+          <div class="form-group form-group-default required">
+            <label>Anrede</label>
+            <input ng-model="client.title" type="text" class="form-control" required>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div class="form-group form-group-default required">
+            <label>Vorname</label>
+            <input ng-model="client.name" type="text" class="form-control" required>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div class="form-group form-group-default required">
+            <label>Nachname</label>
+            <input ng-model="client.lastName" type="text" class="form-control" required>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-5">
+          <div class="form-group form-group-default required">
+            <label>Straße</label>
+            <input ng-model="client.street" type="text" class="form-control" required>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group form-group-default required">
+            <label>Stadt</label>
+            <input ng-model="client.city" type="text" class="form-control" required>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group form-group-default required">
+            <label>Postleitzahl</label>
+            <input ng-model="client.zipcode" type="text" class="form-control" required>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group form-group-default">
+            <label>Telefonnummer</label>
+            <input ng-model="client.phone" type="tel" class="form-control" >
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group form-group-default">
+            <label>Mobilfunknummer</label>
+            <input ng-model="client.mobilePhone" type="tel" class="form-control" >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer no-padding m-t-10">
+      <input type="reset" class="btn" value="Abbrechen" ng-click="close()">
+      <input type="submit" class="btn btn-primary btn-lg" value="Speichern">
+    </div>
+  </div>
+</form>

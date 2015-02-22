@@ -1,6 +1,18 @@
 'use strict';
 
-angular.module('pages', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'restangular', 'ui.router', 'ui.bootstrap', 'clients', 'directives', 'factories', 'clientModals'])
+angular.module('pages', [
+  'ngAnimate',
+  'ngCookies',
+  'ngTouch',
+  'ngSanitize',
+  'restangular',
+  'ui.router',
+  'ui.bootstrap',
+  'clients',
+  'directives',
+  'factories',
+  'projects'
+  ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('index', {
@@ -15,7 +27,12 @@ angular.module('pages', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'res
       .state('base.clients', {
         url: '/clients',
         templateUrl: 'components/clients/list.html',
-        controller: 'ClientsCtrl'
+        controller: 'ClientsCtrl as ClientsCtrl'
+      })
+      .state('base.projects', {
+        url: '/projects',
+        templateUrl: 'components/projects/list.html',
+        controller: 'ProjectsCtrl as ProjectsCtrl'
       });
 
     $urlRouterProvider.otherwise('/404');

@@ -7,7 +7,7 @@
         <li>
           <p>Pages</p>
         </li>
-        <li><a href="#" class="active">Alle Kunden</a>
+        <li><a href="#" class="active">Alle Projekte</a>
         </li>
       </ul>
       <!-- END BREADCRUMB -->
@@ -21,7 +21,7 @@
   <!-- BEGIN PlACE PAGE CONTENT HERE -->
   <div class="panel panel-default">
     <div class="panel-heading ">
-      <div class="panel-title">Alle Kunden
+      <div class="panel-title">Alle Projekte
       </div>
       <div class="panel-controls">
         <ul>
@@ -52,24 +52,24 @@
       <table class="table table-hover" ng-controller="ClientModalCtrl as ClientModals">
         <thead>
         <tr>
-          <th style="width: 25%;">Name</th>
-          <th style="width: 45%;">Adresse</th>
+          <th style="width: 25%;">Kunde</th>
+          <th style="width: 45%;">Name</th>
           <th style="width: 30%;">Telefonnummern</th>
         </tr>
         <tr>
           <th>
-            <button class="btn btn-primary" ng-click="ClientModals.new()">Neuer Kunde</button>
+            <button class="btn btn-primary" ng-click="ClientModals.new()">Neues Projekt</button>
           </th>
           <th colspan="10">
-            <input placeholder="Suchen..." class="input-sm form-control" type="search" ng-model="ClientsCtrl.search" />
+            <input placeholder="Suchen..." class="input-sm form-control" type="search" ng-model="ProjectsCtrl.search" />
           </th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="client in ClientsCtrl.clients | filter: ClientsCtrl.search | orderBy: 'name'" ng-click="ClientModals.edit(client)" class="pointer">
-          <td>{{ client.fullName }}</td>
-          <td>{{ client.address }}</td>
-          <td>{{ client.phone }} | {{ client.mobilePhone }}</td>
+        <tr ng-repeat="project in ProjectsCtrl.projects | filter: ProjectsCtrl.search | orderBy: 'name'" ng-click="ClientModals.edit(client)" class="pointer">
+          <td>{{ project.client.fullName }}</td>
+          <td>{{ project.name }}</td>
+          <td>{{  }}</td>
         </tr>
         </tbody>
       </table>
