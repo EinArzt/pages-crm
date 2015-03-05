@@ -49,16 +49,16 @@
       </div>
     </div>
     <div class="panel-body">
-      <table class="table table-hover" ng-controller="ClientModalCtrl as ClientModals">
+      <table class="table table-hover" ng-controller="ProjectModalCtrl as ProjectModals">
         <thead>
         <tr>
-          <th style="width: 25%;">Kunde</th>
-          <th style="width: 45%;">Name</th>
+          <th style="width: 30%;">Kunde</th>
+          <th style="width: 40%;">Name</th>
           <th style="width: 30%;">Telefonnummern</th>
         </tr>
         <tr>
           <th>
-            <button class="btn btn-primary" ng-click="ClientModals.new()">Neues Projekt</button>
+            <button class="btn btn-primary" ng-click="ProjectModals.new()">Neues Projekt</button>
           </th>
           <th colspan="10">
             <input placeholder="Suchen..." class="input-sm form-control" type="search" ng-model="ProjectsCtrl.search" />
@@ -66,10 +66,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="project in ProjectsCtrl.projects | filter: ProjectsCtrl.search | orderBy: 'name'" ng-click="ClientModals.edit(client)" class="pointer">
+        <tr ng-repeat="project in ProjectsCtrl.projects | filter: ProjectsCtrl.search | orderBy: 'name'" ui-sref="base.project({projectId: project.id})" class="pointer">
           <td>{{ project.client.fullName }}</td>
           <td>{{ project.name }}</td>
-          <td>{{  }}</td>
+          <td></td>
         </tr>
         </tbody>
       </table>

@@ -12,6 +12,12 @@ angular.module('clients', [ 'clients.modals', 'clients.services' ])
     this.search = "";
 
     this.clients = ClientService.get.all();
+    /*ClientService.get.byId().then(function(client) {
+      $scope.client = client;
+    })
+      .catch(function(e) {
+        alert('error');
+      });*/
 
     /*$scope.$on('CLIENTS_UPDATE', function() {
       console.log($scope.clients);

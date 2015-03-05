@@ -207,10 +207,8 @@
         }
     	.actions{
     		height: 50px;
-    		display: none;
     		float: left;
     		li{
-    			display: inline-block;
     			list-style: none;
     			position: relative;
     			&:last-child:after{
@@ -317,6 +315,32 @@
             font-size: 24px;
         }
     }
+
+    .email-composer{
+        margin-left: 250px;
+        position: relative;
+        overflow: auto;
+        height: 100%;
+        background: #fff;
+        .email-toolbar-wrapper .wysihtml5-toolbar{
+            background: @color-master-lighter;
+            border-bottom:1px solid @color-master-light;
+            position: relative;
+            border-top: none;
+        }
+        .email-body-wrapper{
+            border-bottom:1px solid @color-master-light;
+            margin-bottom: 20px;
+        }
+        .bootstrap-tagsinput{
+            margin: 0;
+            padding: 0;
+        }
+        & > .row{
+            margin-left: -30px;
+            margin-right: -30px;
+        }
+    }
 }
 /* Email App Top Header 
 --------------------------------------------------
@@ -336,70 +360,69 @@
 */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape){
 
-.email-wrapper .email-sidebar{
-            float: none;
-            height: auto;
-            left: 50%;
-            margin-left: -155px;
-            padding: 20px;
-            position: absolute;
-            right: 0;
-            top: 0;
-            z-index: 9999;
+    .email-wrapper .email-sidebar{
+        float: none;
+        height: auto;
+        left: 50%;
+        margin-left: -155px;
+        padding: 20px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 9999;
+        display: none;
+        border-radius: 10px;
+        .btn-compose{
             display: none;
-            border-radius: 10px;
-            .btn-compose{
-                display: none;
-            }
         }
+    }
 
-        .email-wrapper .email-opened{
-    margin-left: 0;
-}
+    .email-wrapper .email-opened{
+        margin-left: 0;
+    }
 
-     .toggle-email-sidebar{
-    
-            font-size: 18px;
-
-            display: block;
-
-    font-size: 18px;
-    left: 50%;
-    margin-left: -36px;
-    position: absolute;
-
-            & ~ .brand{
-                display: none !important;
-            }
+    .toggle-email-sidebar{
+        font-size: 18px;
+        display: block;
+        font-size: 18px;
+        left: 50%;
+        margin-left: -36px;
+        position: absolute;
+        & ~ .brand{
+            display: none !important;
         }
-
+    }
 }
 
 
-
+@media (max-width: 1024px){
+    .email-wrapper .email-composer{
+        margin-left: 0;
+    }
+}
 
 /*** General tablets and phones ***/
 // TODO: 991 should be the breakpoint, where -sm ends
 @media (max-width: 979px) {
 
-.email-wrapper .email-sidebar{
-            float: none;
-            height: auto;
-            left: 50%;
-            margin-left: -125px;
-            padding: 20px;
-            position: absolute;
-            right: 0;
-            top: 0;
-            z-index: 9999;
+    .email-wrapper .email-sidebar{
+        float: none;
+        height: auto;
+        left: 50%;
+        margin-left: -125px;
+        padding: 20px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 9999;
+        display: none;
+        border-radius: 10px;
+        .btn-compose{
             display: none;
-            border-radius: 10px;
-            .btn-compose{
-                display: none;
-            }
         }
+    }
 
-.email-wrapper{
+    .email-wrapper{
         .email-list{
             width: 100%;
             height: auto;
@@ -458,7 +481,9 @@
         .email-opened{
             margin-left: 0;
         }
-    } 
-
-    
+        .email-composer{
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+    }     
 }

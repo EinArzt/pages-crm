@@ -204,16 +204,6 @@
 }
 /*** Desktops ***/
 @media (min-width: 1600px) {
-
-    // .visible-xlg {
-    //     display: block !important;
-    // }
-    // .hidden-xlg {
-    //     display: none !important;
-    // }
-
-
-   
 }
 /*** Medium Size Screen ***/
 @media only screen and (max-width: 1400px) {
@@ -396,34 +386,12 @@
         .page-content-wrapper .content{
             overflow-x: hidden;
             height: auto; // minimizes address bar on scroll
-            background-color: @color-master-lightest;
         }
     }
 
     .icon-thumbnail{
         margin-right: 24px;   
     }
-    /* Social page */
-    //.desktop {
-        .stream {
-            margin: 0;
-            padding: 0 60px;
-            width: 100% !important;
-            & > .day{
-                width: 100% !important;
-                .timeline{
-                    display: none;
-                }
-                & > .item{
-                    width: 100% !important;
-                    margin-bottom: 20px;
-                    .item-content > img{
-                        width: 100%;
-                    }
-                }
-            }
-        }
-
      .page-sidebar {
         display: none;
         z-index: auto;
@@ -471,11 +439,6 @@
         right: auto;
     }
 
-    // body > .pgn-wrapper[data-position^='top-'] {
-    //     top:  @layout-mobile-header-height + 10px;
-    //     bottom: auto;
-    // }
-
     .sm-table{
         display: table;
         width: 100%;
@@ -506,27 +469,6 @@
 }
 
 // Resolution specific borders
-// applied to resolutions "lower than" (-lt-) the specified
-// @media (max-width:1199px){
-//   .b-r-lt-lg,
-//   .b-l-lt-lg,
-//   .b-t-lt-lg,
-//   .b-b-lt-lg{
-//     border-width: 0;
-//   }
-//   .b-r-lt-lg{
-//     border-right-width:1px;
-//   }
-//   .b-l-lt-lg{
-//     border-left-width:1px;
-//   }
-//   .b-t-lt-lg{
-//     border-top-width:1px;
-//   }
-//   .b-b-lt-lg{
-//     border-bottom-width:1px;
-//   }
-// }
 @media (max-width:991px){
   .sm-b-r,
   .sm-b-l,
@@ -547,27 +489,6 @@
     border-bottom-width:1px;
   }
 }
-// @media (max-width:767px){
-   
-//   .b-r-lt-sm,
-//   .b-l-lt-sm,
-//   .b-t-lt-sm,
-//   .b-b-lt-sm{
-//     border-width: 0;
-//   }
-//   .b-r-lt-sm{
-//     border-right-width:1px;
-//   }
-//   .b-l-lt-sm{
-//     border-left-width:1px;
-//   }
-//   .b-t-lt-sm{
-//     border-top-width:1px;
-//   }
-//   .b-b-lt-sm{
-//     border-bottom-width:1px;
-//   }
-// }
 
 // Make all columns equal height
 // (Not applied for resolutions lowers than mentioned ex:lg,md,sm
@@ -617,24 +538,6 @@
     .icon-thumbnail {
         margin-right: 21px;
     }
-    /* Social page */
-      .stream {
-        margin: 0;
-        padding: 0 60px;
-        & > .day{
-            width: 100% !important;
-            .timeline{
-                display: none;
-            }
-            & > .item{
-                width: 100% !important;
-                margin-bottom: 20px;
-                .item-content > img{
-                    width: 100%;
-                }
-            }
-        }
-     }
     .error-page{
         .error-container{
             width: auto;
@@ -846,7 +749,7 @@
         left: 10px;
     }
     .register-container{
-        padding-bottom: 135px;
+        height: auto !important;
     }
     .error-container-innner{
         width: auto;

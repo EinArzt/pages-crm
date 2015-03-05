@@ -402,13 +402,6 @@ body {
                     & > ul {
                         &.sub-menu {
                             display: block;
-                            & > li {
-                                ul {
-                                    &.sub-menu {
-                                        display: block;
-                                    }
-                                }
-                            }
                         }
                     }
                 }
@@ -831,7 +824,7 @@ body {
 .page-container {
     width:100%;
     height:100%;
-    background-color: @color-master-lightest;
+    background-color: inherit;
     .page-content-wrapper{
         min-height: 100%;
         position: relative;
@@ -866,6 +859,9 @@ body {
             right: 0;
             bottom: 0;
             .transition(left 0.3s ease);
+            &.fixed{
+                position: fixed;
+            }
         }
     }
 }

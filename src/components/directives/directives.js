@@ -136,4 +136,39 @@ angular.module('directives', [ ])
         });
       }
     }
+  })
+  .directive('select2', function($timeout) {
+    return {
+      restrict: 'A',
+      link: function(scope, element, attr) {
+        element.select2({
+          minimumResultsForSearch: (element.attr('data-disable-search') == 'true' ? -1 : 1),
+          language: 'de'
+        }).on('select2-opening', function() {
+          $('.select2-results').scrollbar({
+            ignoreMobile: false
+          });
+        });
+      }
+    }
+  })
+  .directive('select2Promise', function($timeout) {
+    return {
+      restrict: 'A',
+      link: function(scope, element, attr) {
+        element.select2({
+          minimumResultsForSearch: (element.attr('data-disable-search') == 'true' ? -1 : 1),
+          language: 'de'
+        }).on('select2-opening', function() {
+          $('.select2-results').scrollbar({
+            ignoreMobile: false
+          });
+        });
+
+        //TODO: REMOVE SELECT2 PROMISE SELECTING HACK
+        $timeout(function() {
+          element.trigger('change');
+        }, 1);
+      }
+    }
   });

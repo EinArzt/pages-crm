@@ -437,7 +437,6 @@ input[type=checkbox]:checked + label{
             vertical-align: top;
             .form-group{
                 height: 100%;
-                display: table;
                 width: 100%;
             }
         }
@@ -502,6 +501,7 @@ input[type=checkbox]:checked + label{
         background-color:@color-master-lighter;
         label {
             opacity: .4;
+            .backface-visibility(hidden);
         }
     }
     &.has-error{
@@ -559,6 +559,7 @@ input[type=checkbox]:checked + label{
     label {
         margin: 0;
         display: block;
+        opacity: 1;
         .transition(opacity .2s ease);
         &.label-lg {
             font-size: 13px;
@@ -575,6 +576,7 @@ input[type=checkbox]:checked + label{
         }
         &.fade{
             opacity: .5;
+            .backface-visibility(hidden);
         }
     }
     & > .input-lg {
@@ -914,6 +916,54 @@ https://github.com/eternicode/bootstrap-datepicker
     border:0;
 }
 
+/* Timepicker 
+https://github.com/m3wolf/bootstrap3-timepicker
+*/
+
+.bootstrap-timepicker-widget{
+    table td a i{
+        font-size: 12px;
+    }
+    a.btn, .bootstrap-timepicker-widget input{
+        .border-radius(2px);
+    }
+    &.dropdown-menu{
+        background: #fff;
+    }
+}
+
+
+/* Daterangepicker
+http://www.dangrossman.info/
+*/
+
+.daterangepicker{
+    background: #fff;
+    .calendar{
+        .calendar-date{
+            border: 1px solid @form-control-border-color;
+        }
+        .prev, .next, th{
+            color: @color-primary;
+            text-transform: uppercase;
+            font-size: 11px;            
+        }
+        th, .month{
+            font-family: 'Montserrat';
+        }
+        .month{
+            color: #6f7b8a;
+            font-size: 13px;            
+        }
+    }
+    td.active, td.active:hover{
+        background-color: @color-primary;
+        border-color: @color-primary;
+    }
+    td.in-range{
+      //å  background:@color-primary-lighter;
+    }
+}       
 /* Select2
 http://ivaynberg.github.io/select2/
 */
@@ -1112,6 +1162,17 @@ http://ivaynberg.github.io/select2/
     z-index: 700;
 }
 
+.modal-open{
+    .select2-drop-active{
+        z-index: 1051;
+    }
+    .select2-drop-mask{
+        z-index: 1050;
+    }
+    .cs-skin-slide.cs-active{
+        z-index: 1050;
+    }
+}
 
 .dropdown-placeholder{
     display: inline-block;
@@ -1158,6 +1219,7 @@ https://github.com/timschlechter/bootstrap-tagsinput
         padding: 6px 9px;
         padding-right: 6px;
         border-radius: 3px;
+        line-height: 30px;
     }
     .tag[data-role="remove"]{
         margin-left: 4px;
@@ -1542,18 +1604,6 @@ div.cs-select:focus {
 
 
 
-
-@font-face {
-    font-family: 'icomoon';
-    src:url('../fonts/icomoon/icomoon.eot?-rdnm34');
-    src:url('../fonts/icomoon/icomoon.eot?#iefix-rdnm34') format('embedded-opentype'),
-        url('../fonts/icomoon/icomoon.woff?-rdnm34') format('woff'),
-        url('../fonts/icomoon/icomoon.ttf?-rdnm34') format('truetype'),
-        url('../fonts/icomoon/icomoon.svg?-rdnm34#icomoon') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
 div.cs-skin-slide {
     color: #fff;
     /*font-size: 1.5em;*/
@@ -1597,15 +1647,6 @@ div.cs-skin-slide::before {
 .cs-skin-slide.cs-active > span {
     text-indent: -290px;
     opacity: 0;
-}
-
-.cs-skin-slide > span::after,
-.cs-skin-slide.cs-active > span::after {
-    font-family: 'icomoon';
-    content: '\e00f';
-    color: #eb7e7f;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
 }
 
 .cs-skin-slide.cs-active > span::after {
@@ -1685,40 +1726,6 @@ div.cs-skin-slide::before {
 .cs-skin-slide .cs-selected span::after {
     content: '';
 }
-
-[class^="icon-"] span:before,
-[class*=" icon-"] span:before {
-    font-family: 'icomoon';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    -webkit-transform: translate3d(0,-50%,0);
-    transform: translate3d(0,-50%,0);
-    font-size: 1.5em;
-}
-
-.icon-camera span::before {
-    content: '\e00b';
-}
-
-.icon-money span::before {
-    content: '\e008';
-}
-
-.icon-heart span::before {
-    content: '\e00a';
-}
-
-.icon-food span::before {
-    content: '\e009';
-}
-
-.icon-shirt span::before {
-    content: '\e00c';
-}
-
-
-
 
 
 /* Pages Select  overriding */

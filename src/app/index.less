@@ -14,3 +14,53 @@ empty {
 .m-t-10 {
   margin-top: 10px !important;
 }
+
+.m-t-0 {
+  margin-top: 0px !important;
+}
+
+.timeline::before {
+  background: #10cfbd;
+}
+
+.recent-act {
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: table;
+  position: relative;
+  table-layout: fixed;
+  width: 100%;
+
+  &::before {
+    background-color: #10cfbd;
+    bottom: 0;
+    content: "";
+    left: 50%;
+    position: absolute;
+    top: 50px;
+    width: 2px;
+    margin-left: -1px;
+    z-index: 0;
+  }
+
+  h3 {
+    text-align: center;
+  }
+
+  .timeline-point {
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    color: #C7CBD6;;
+    height: 40px;
+    line-height: 30px;
+    text-align: center;
+    width: 40px;
+    margin: 20px auto 20px;
+    position: relative;
+    top: 0;
+  }
+
+  .card {
+    float: none;
+  }
+}

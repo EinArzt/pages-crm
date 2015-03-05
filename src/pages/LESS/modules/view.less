@@ -26,6 +26,7 @@
 			position: absolute;
 			top:0;
 			line-height: 50px;
+			z-index: 1;
 			&.pull-right{
 				right: 0;
 			}
@@ -77,14 +78,14 @@
 		}
 	}
 	&.from-top{
-		.view{
+		& > .view{
 			&:last-child{
 				.translate3d(-100%,0,0);
 			}
 		}
 	}
 	&.push{
-		.view{
+		& > .view{
 			&:first-child{
 				.translate3d(-100%,0,0);
 			}
@@ -94,7 +95,7 @@
 		}
 	}
 	&.push-parrallax{
-		.view{
+		& > .view{
 			&:first-child{
 				.transition(all 400ms cubic-bezier(0.1,.7,.1,1));
 				.translate3d(-25%,0,0);

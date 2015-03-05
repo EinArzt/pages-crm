@@ -54,7 +54,7 @@ angular.module('factories', [ ])
         }
       },
       new: {
-        success: function(client) {
+        success: function(project) {
           pgNotificationService.success('Das Projekt ' + project.name + ' wurde erfolgreich erstellt.');
         },
         error: function() {
@@ -62,7 +62,7 @@ angular.module('factories', [ ])
         }
       },
       delete: {
-        success: function(client) {
+        success: function(project) {
           pgNotificationService.success('Das Projekt ' + project.name + ' wurde erfolgreich gelöscht.');
         },
         error: function() {

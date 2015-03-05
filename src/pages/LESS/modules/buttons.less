@@ -32,9 +32,6 @@
     padding-right: @padding-base-horizontal;
     position: relative;
     transition: color 0.1s linear 0s,background-color 0.1s linear 0s,opacity 0.2s linear 0s !important;
-    &:focus {
-        outline: 0 !important;
-    }
     &:hover{
         background-color: #fafafa;
         border: 1px solid fade(@color-master,27%);
@@ -42,6 +39,12 @@
     &.active{
         border-color: @color-master-light;
         background: #fff;
+    }
+    &:focus, 
+    &:active:focus, 
+    &.active:focus { 
+        outline: none !important; 
+        outline-style: none;
     }
     .caret {
         margin-left: 3px;
@@ -58,7 +61,10 @@
         box-shadow: none;
     }
 }
-
+// Fix for chrome's button outline on focus
+button:focus{
+    outline: none !important;
+}
 /*
 Alternate buttons
 --------------------------------------------------

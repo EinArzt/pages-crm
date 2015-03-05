@@ -1,0 +1,256 @@
+<div class="jumbotron" data-pages="parallax">
+  <div class="container-fluid container-fixed-lg sm-p-l-20 sm-p-r-20">
+    <div class="inner">
+      <!-- START BREADCRUMB -->
+      <ul class="breadcrumb">
+        <li>
+          <p>Pages</p>
+        </li>
+        <li><a ui-sref="base.projects">Projekte</a></li>
+        <li><a href="#" class="active">Projekt: {{ ProjectCtrl.project.name }}</a></li>
+      </ul>
+      <!-- END BREADCRUMB -->
+    </div>
+  </div>
+</div>
+<!-- END JUMBOTRON -->
+
+<!-- START CONTAINER FLUID -->
+<div class="container-fluid container-fixed-lg">
+  <div class="row">
+    <div class="col-md-12">
+      <section class="panel">
+        <div class="panel-body">
+          <div class="col-md-3">
+            <div class="text-center">
+              <img src="http://placehold.it/160x160" alt="">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h1 class="no-margin">{{ ProjectCtrl.project.name }}</h1>
+            <h4 class="text-muted m-b-10 m-t-0">bei <strong>{{ ProjectCtrl.project.client.fullName }}</strong></h4>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porttitor vestibulum imperdiet. Ut auctor accumsan erat, a vulputate metus tristique non. Aliquam aliquam vel orci quis sagittis.
+            </p>
+            <a ng-controller="ProjectModalCtrl as ProjectModals" ng-click="ProjectModals.edit(ProjectCtrl.project)" class="btn btn-primary">Bearbeiten</a>
+          </div>
+          <div class="col-md-3">
+            <div class="profile-statistics">
+              <h1>1240</h1>
+              <p>This Week Sales</p>
+              <h1>$5,61,240</h1>
+              <p>This Week Earn</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <section class="panel">
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="nav nav-tabs">
+          <li role="presentation" ui-sref-active-eq="active"><a ui-sref="base.project({ projectId: ProjectCtrl.project.id })">Überblick</a></li>
+          <li role="presentation" ui-sref-active="active"><a ui-sref=".activity">Aktivität</a></li>
+          <li role="presentation"><a href="#">Mitarbeiter</a></li>
+          <li role="presentation"><a href="#">Rechnungen</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" ui-view>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="recent-act">
+                  <h3>Letzte Aktivitäten</h3>
+                  <div class="timeline-point success bounce-in">
+                    <i class="fa fa-beer"></i>
+                  </div>
+                  <div class="card share full-width">
+                    <div class="card-header clearfix">
+                      <div class="user-pic">
+                        <img alt="Profile Image" width="33" height="33" data-src-retina="assets/img/profiles/8x.jpg" data-src="assets/img/profiles/8.jpg" src="assets/img/profiles/8x.jpg">
+                      </div>
+                      <h5>Jeff Curtis</h5>
+                      <h6>Shared a Tweet
+                        <span class="location semi-bold"><i class="fa fa-map-marker"></i> SF, California</span>
+                      </h6>
+                    </div>
+                    <div class="card-description">
+                      <p>What you think, you become. What you feel, you attract. What you imagine, you create - Buddha. <a href="#">#quote</a> </p>
+                      <div class="via">via Twitter</div>
+                    </div>
+                  </div>
+                  <div class="timeline-point red">
+                    <i class="fa fa-beer"></i>
+                  </div>
+                  <div class="card share full-width">
+                    <div class="circle" data-toggle="tooltip" title="" data-container="body" data-original-title="Label">
+                    </div>
+                    <div class="card-header clearfix">
+                      <div class="user-pic">
+                        <img alt="Profile Image" width="33" height="33" data-src-retina="assets/img/profiles/8x.jpg" data-src="assets/img/profiles/8.jpg" src="assets/img/profiles/8x.jpg">
+                      </div>
+                      <h5>Jeff Curtis</h5>
+                      <h6>Shared a Tweet
+                        <span class="location semi-bold"><i class="fa fa-map-marker"></i> SF, California</span>
+                      </h6>
+                    </div>
+                    <div class="card-description">
+                      <p>What you think, you become. What you feel, you attract. What you imagine, you create - Buddha. <a href="#">#quote</a> </p>
+                      <div class="via">via Twitter</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="prf-box">
+                  <h3 class="prf-border-head">work in progress</h3>
+                  <div class=" wk-progress">
+                    <div class="col-md-5">Themeforest</div>
+                    <div class="col-md-5">
+                      <div class="progress  ">
+                        <div style="width: 70%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-danger">
+                          <span class="sr-only">70% Complete (success)</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-2">70%</div>
+                  </div>
+                  <div class=" wk-progress">
+                    <div class="col-md-5">Graphics River</div>
+                    <div class="col-md-5">
+                      <div class="progress ">
+                        <div style="width: 57%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-success">
+                          <span class="sr-only">57% Complete (success)</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-2">57%</div>
+                  </div>
+                  <div class=" wk-progress">
+                    <div class="col-md-5">Code Canyon</div>
+                    <div class="col-md-5">
+                      <div class="progress ">
+                        <div style="width: 20%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-info">
+                          <span class="sr-only">20% Complete (success)</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-2">20%</div>
+                  </div>
+                  <div class=" wk-progress">
+                    <div class="col-md-5">Audio Jungle</div>
+                    <div class="col-md-5">
+                      <div class="progress ">
+                        <div style="width: 30%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-warning">
+                          <span class="sr-only">30% Complete (success)</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-2">30%</div>
+                  </div>
+                </div>
+                <div class="prf-box">
+                  <h3 class="prf-border-head">performance status</h3>
+                  <div class=" wk-progress pf-status">
+                    <div class="col-md-8 col-xs-8">Total Product Sales</div>
+                    <div class="col-md-4 col-xs-4">
+                      <strong>23545</strong>
+                    </div>
+                  </div>
+                  <div class=" wk-progress pf-status">
+                    <div class="col-md-8 col-xs-8">Total Product Refer</div>
+                    <div class="col-md-4 col-xs-4">
+                      <strong>235</strong>
+                    </div>
+                  </div>
+                  <div class=" wk-progress pf-status">
+                    <div class="col-md-8 col-xs-8">Total Earn</div>
+                    <div class="col-md-4 col-xs-4">
+                      <strong>235452344$</strong>
+                    </div>
+                  </div>
+                </div>
+                <div class="prf-box">
+                  <h3 class="prf-border-head">team members</h3>
+                  <div class=" wk-progress tm-membr">
+                    <div class="col-md-2 col-xs-2">
+                      <div class="tm-avatar">
+                        <img src="images/lock_thumb.jpg" alt="">
+                      </div>
+                    </div>
+                    <div class="col-md-7 col-xs-7">
+                      <span class="tm">John Boltana</span>
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                      <a href="#" class="btn btn-white">Assign</a>
+                    </div>
+                  </div>
+                  <div class=" wk-progress tm-membr">
+                    <div class="col-md-2 col-xs-2">
+                      <div class="tm-avatar">
+                        <img src="images/avatar-mini-2.jpg" alt="">
+                      </div>
+                    </div>
+                    <div class="col-md-7 col-xs-7">
+                      <span class="tm">John Boltana</span>
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                      <a href="#" class="btn btn-white">Assign</a>
+                    </div>
+                  </div>
+                  <div class=" wk-progress tm-membr">
+                    <div class="col-md-2 col-xs-2">
+                      <div class="tm-avatar">
+                        <img src="images/avatar-mini-3.jpg" alt="">
+                      </div>
+                    </div>
+                    <div class="col-md-7 col-xs-7">
+                      <span class="tm">John Boltana</span>
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                      <a href="#" class="btn btn-white">Assign</a>
+                    </div>
+                  </div>
+                  <div class=" wk-progress tm-membr">
+                    <div class="col-md-2 col-xs-2">
+                      <div class="tm-avatar">
+                        <img src="images/avatar-mini-4.jpg" alt="">
+                      </div>
+                    </div>
+                    <div class="col-md-7 col-xs-7">
+                      <span class="tm">John Boltana</span>
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                      <a href="#" class="btn btn-white">Assign</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!--
+<div class="card share col1" data-social="item">
+  <div class="circle" data-toggle="tooltip" title="Label" data-container="body">
+  </div>
+  <div class="card-header clearfix">
+    <div class="user-pic">
+      <img alt="Profile Image" width="33" height="33" data-src-retina="assets/img/profiles/6x.jpg" data-src="assets/img/profiles/6.jpg" src="assets/img/profiles/6x.jpg">
+    </div>
+    <h5>Nathaniel Hamilton</h5>
+    <h6>Shared a Tweet
+      <span class="location semi-bold"><i class="icon-map"></i>  NYC, New York</span>
+    </h6>
+  </div>
+  <div class="card-description">
+    <p>Testing can show the presense of bugs, but not their absence.</p>
+    <div class="via">via Twitter</div>
+  </div>
+</div>
+-->

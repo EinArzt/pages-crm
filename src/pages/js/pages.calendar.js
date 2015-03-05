@@ -1,3 +1,4 @@
+//Pages Calendar - Version 1.1.0
 (function($) {
     'use strict';
 
@@ -34,8 +35,8 @@
                     //TODO
                 },
                 setLocale: function(lang) {
-                    setting.locale = lang;
-                    helps.setLocale();
+                    settings.locale = lang;
+                    helpers.setLocale();
                 },
                 reloadEvents: function() {
                     helpers.loadEvents();
@@ -137,7 +138,7 @@
                 var container = "#months";
                 $(container).html("");
                 content = "";
-                var monthInc = moment('January', 'MMMM').format(settings.ui.month.format);
+                var monthInc = moment(moment().startOf('year'), 'MMMM').format(settings.ui.month.format);
                 for (var i = 1; i <= 12; i++) {
                     var activeClass = (moment([calendar.year, calendar.month, calendar.date]).format(settings.ui.month.format) == monthInc) ? 'active' : '';
                     content += '<div class="month">';
@@ -154,7 +155,7 @@
             highlightMonth: function() {
                 var container = "#months";
                 $('.month a').removeClass('active');
-                $('.month:nth-child(' + (parseInt(calendar.month) + 1) + ') > a').addClass('active')
+                $('.month:nth-child(' + (parseInt(calendar.month) + 1) + ') > a').addClass('active');
             },
             /**
              * Higlight Year On Date Change
@@ -258,7 +259,7 @@
                 for (var i = 1; i <= daysOfMonth; i++) {
                     var t = moment([calendar.year, calendar.month, i]).format('ddd');
                     var activeClass = (calendar.date == i) ? 'active current-date' : '';
-                    (t == settings.ui.week.startOfTheWeek || i == 1) ? content += '<div class="week ' + activeClass + '">': '';
+                    (t ==  moment(settings.ui.week.startOfTheWeek,'d').format('ddd') || i == 1) ? content += '<div class="week ' + activeClass + '">': '';
                     content += '<div class="day-wrapper date-selector">';
                     content += '<div class="week-day">';
                     content += '<div class="day week-header">' + moment([calendar.year, calendar.month, i]).format('dd') + '</div>';
@@ -267,7 +268,7 @@
                     content += '<div class="day"><a href="#" data-date=' + moment([calendar.year, calendar.month, i]).format('D') + '>' + i + '</a></div>';
                     content += '</div>';
                     content += '</div>';
-                    (t == 'Sat') ? content += '</div>': '';
+                    (t == moment(settings.ui.week.endOfTheWeek,'d').format('ddd')) ? content += '</div>': '';
                 }
                 content += '</div>';
 
@@ -711,6 +712,7 @@
              */
             weekDateChange: function(day, elem) {
                 calendar.date = day;
+                this.buildCurrentDateHeader();
                 this.highlightWeek(elem);
                 this.loadDatesToWeekView();
                 this.highlightActiveDay();
@@ -742,26 +744,26 @@
             },
 
             bindEventHanders: function() {
-                $(".date-selector").live("click", function(e) {
+                $(document).on("click", ".date-selector",function(e) {
                     $(".week-date").removeClass('active')
                     $(this).children('.week-date').addClass('active');
                     helpers.weekDateChange(parseInt($(this).children('.week-date').children('.day').children('a').attr('data-date')), $(this));
                 });
 
-                $(".cell-inner").live("dblclick doubletap", function() {
+                $(document).on("dblclick doubletap", ".cell-inner",function() {
                     helpers.timeSlotDblClick(this);
                 });
-                $('.event-container').live('click', function() {
+                $(document).on('click','.event-container',function() {
                     var eventO = helpers.constructEventForUser($(this).attr('data-index'));
                     $.fn.pagescalendar.settings.onEventClick(eventO);
                 });
-                $('.year-selector').live('click', function() {
+                $('.year-selector').on('click', function() {
                     var year = $(this).attr('data-year');
                     calendar.year = moment(year, settings.ui.year.format).year();
                     helpers.highlightYear();
                     helpers.renderViewsOnDateChange();
                 });
-                $('.month-selector').live('click', function() {
+                $('.month-selector').on('click', function() {
                     var month = $(this).attr('data-month');
                     calendar.month = moment(month, settings.ui.month.format).month();
                     helpers.renderViewsOnDateChange();
@@ -850,7 +852,8 @@
                     format: 'dd'
                 },
                 eventBubble: true,
-                startOfTheWeek: 'Sun'
+                startOfTheWeek: '0',
+                endOfTheWeek:'6'
             },
             grid: {
                 dateFormat: 'D dddd',

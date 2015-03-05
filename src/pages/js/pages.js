@@ -384,16 +384,12 @@
     /**
     * jQuery offset() in pure JS
     */
-    function offset(obj) {
-        var curleft, curtop;
-        curleft = curtop = 0;
-        if (obj.offsetParent) {
-            do {
-                curleft += obj.offsetLeft;
-                curtop += obj.offsetTop;
-            } while (obj = obj.offsetParent);
-            return {left:curleft, top:curtop};
+    function offset(el) {
+        return {
+            left : el.getBoundingClientRect().left + window.pageXOffset - el.ownerDocument.documentElement.clientLeft,
+            top : el.getBoundingClientRect().top + window.pageYOffset - el.ownerDocument.documentElement.clientTop
         }
+        
     }
 
     /**
@@ -411,8 +407,14 @@
         newTab : true,
         // when opening the select element, the default placeholder (if any) is shown
         stickyPlaceholder : true,
+        // default container is body
+        container : 'body',
         // callback when changing the value
-        onChange : function( val ) { return false; }
+        onChange : function( el ) { 
+            var event = document.createEvent('HTMLEvents');
+            event.initEvent('change', true, false);
+            el.dispatchEvent(event);
+        }
     }
 
     /**
@@ -602,7 +604,7 @@
      */
     SelectFx.prototype._toggleSelect = function() {
         var backdrop = this.selEl.querySelector('.cs-backdrop');
-        var container = document.querySelector('body');
+        var container = document.querySelector(this.options.container);
         var mask = container.querySelector('.dropdown-mask');
         var csOptions = this.selEl.querySelector('.cs-options');
         var csPlaceholder = this.selEl.querySelector('.cs-placeholder');
@@ -697,9 +699,6 @@
             classie.add(this.selEl, 'cs-active');
 
             var resizedWidth = (csPlaceholderWidth < csOptionsWidth) ? csOptionsWidth : csPlaceholderWidth;
-            console.log("cs-placeholder: " + csPlaceholderWidth);
-            console.log("cs-options: " + csOptionsWidth);
-
 
             this.selEl.style.width = resizedWidth + 'px';
             this.selEl.style.height = originalHeight + 'px';
@@ -750,7 +749,7 @@
         }
 
         // callback
-        this.options.onChange( this.el.value );
+        this.options.onChange( this.el );
     }
 
     /**
@@ -1050,11 +1049,12 @@
         this.options.onShown();
 
         if (this.options.timeout != 0) {
+            var _this = this;
             // settimeout removes scope. use .bind(this)
             setTimeout(function() {
                 this.notification.fadeOut("slow", function() {
                     $(this).remove();
-                    this.options.onClosed();
+                    _this.options.onClosed();
                 });
             }.bind(this), this.options.timeout);
         }
@@ -1090,9 +1090,6 @@
         this.options = $.extend(true, {}, $.fn.portlet.defaults, options);
         this.$loader = null;
         this.$body = this.$element.find('.panel-body');
-
-        // Fix for FF: pre-loading animated to SVGs
-        this.$loaderSVG = this.$loaderSVG || $('<img src="pages/img/progress/progress-' + this.options.progress + '-' + this.options.progressColor + '.svg" style="display:none">').appendTo(this.$element);
     }
     Portlet.VERSION = "1.0.0";
     // Button actions
@@ -1182,6 +1179,14 @@
 
             this.$loader.append(elem);
             this.$element.append(this.$loader);
+
+            // Start Fix for FF: pre-loading animated to SVGs
+            var _loader = this.$loader;
+            setTimeout(function(){
+                this.$loader.remove();
+                this.$element.append(_loader);
+            }.bind(this), 300);
+            // End fix
             this.$loader.fadeIn();
 
             $.isFunction(this.options.onRefresh) && this.options.onRefresh();
@@ -1325,55 +1330,40 @@
 
         $(this.options.notes).on('click', '.list > ul > li', function(e) {
             var note = $(this).find('.note-preview');
-            slide('left', function(){
-                $('.quick-note-editor').html(note.html());
-            });
+            var note = $(this).find('.note-preview');
+            $(_this.options.noteEditor).html(note.html());
+            $(_this.options.notes).toggleClass('push');
         });
         $(this.options.notes).on('click', '.list > ul > li .checkbox', function(e) {
             e.stopPropagation();
         });
-        $(this.options.notes).on('click', '.close-note-link', function(e) {
-            slide('right');
+        $(this.options.notes).on('click', _this.options.backButton, function(e) {
+            $(_this.options.notes).find('.toolbar > li > a').removeClass('active');
+            $(_this.options.notes).toggleClass('push');
         });
-        $('.delete-note-link').click(function(e) {
+        $(this.options.deleteNoteButton).click(function(e) {
             e.preventDefault();
             $(this).toggleClass('selected');
             $(_this.options.notes).find('.list > ul > li .checkbox').fadeToggle("fast");
-            $('.btn-remove-notes').fadeToggle("fast").removeClass('hide');
+            $(_this.options.deleteNoteConfirmButton).fadeToggle("fast").removeClass('hide');
         });
-        $('.new-note-link').click(function(e) {
+        $(this.options.newNoteButton).click(function(e) {
             e.preventDefault();
-            slide('left', function() {
-                $('.quick-note-editor').html('');
-            });
+            $(_this.options.noteEditor).html('');
         });
 
-        $('.btn-remove-notes').click(function() {
+        $(this.options.deleteNoteConfirmButton).click(function() {
             var checked = $(_this.options.notes).find('input[type=checkbox]:checked');
             checked.each(function() {
                 $(this).parents('li').remove();
             });
         });
         $(this.options.notes).on('click', '.toolbar > li > a', function(e) {
-            e.preventDefault();
-            var command = $(this).attr('class');
+            //e.preventDefault();
+            var command = $(this).attr('data-action');
             document.execCommand(command, false, null);
             $(this).toggleClass('active');
         });
-
-        function slide(side, callback) {
-            var op1, op2;
-            op1 = (side == 'left') ? (op2 = 'closed') && 'open' : (op2 = 'open') && 'closed';
-
-            $(_this.options.notesList).removeClass(op1).addClass(op2);
-            $(_this.options.notesBody).removeClass(op2).addClass(op1);
-
-            $(_this.options.notes + ' > .inner').toggleClass('slided');
-
-            if (typeof callback != 'undefined') {
-                callback();
-            }
-        }
 
     }
     Quickview.VERSION = "1.0.0";
@@ -1398,11 +1388,15 @@
 
 
     $.fn.quickview.defaults = {
-        notes: '#quickview-notes',
-        alerts: '#quickview-alerts',
-        chat: '#quickview-chat',
+        notes: '#note-views',
+        alerts: '#alerts',
+        chat: '#chat',
         notesList: '.list',
-        notesBody: '.note',
+        noteEditor: '.quick-note-editor',
+        deleteNoteButton: '.delete-note-link',
+        deleteNoteConfirmButton: '.btn-remove-notes',
+        newNoteButton: '.new-note-link',
+        backButton: '.close-note-link'
     }
 
     // QUICKVIEW NO CONFLICT
@@ -1712,7 +1706,7 @@
          }
 
 
-         this.$element.bind('hover', sidebarMouseEnter);
+         this.$element.bind('mouseenter mouseleave', sidebarMouseEnter);
          this.$pageContainer.bind('mouseover', sidebarMouseLeave);
 
      }
@@ -1783,7 +1777,7 @@
      // SIDEBAR PROGRESS DATA API
      //===================
 
-     $(window).on('load', function() {
+     $(document).on('ready', function() {
          $('[data-pages="sidebar"]').each(function() {
              var $sidebar = $(this)
              $sidebar.sidebar($sidebar.data())
@@ -1839,7 +1833,7 @@
             _this.$suggestions.html($(this).val());
         });
 
-        this.$searchField.on('keydown', function(e) {
+        this.$searchField.on('keyup', function(e) {
             _this.options.onKeyEnter(_this.$searchField.val());
             if (e.keyCode == 13) { //Enter pressed
                 e.preventDefault();
