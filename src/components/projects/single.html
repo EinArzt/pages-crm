@@ -172,53 +172,14 @@
                 </div>
                 <div class="prf-box">
                   <h3 class="prf-border-head">team members</h3>
-                  <div class=" wk-progress tm-membr">
+                  <div class=" wk-progress tm-membr" ng-repeat="employee in ProjectCtrl.project.employees">
                     <div class="col-md-2 col-xs-2">
                       <div class="tm-avatar">
                         <img src="images/lock_thumb.jpg" alt="">
                       </div>
                     </div>
                     <div class="col-md-7 col-xs-7">
-                      <span class="tm">John Boltana</span>
-                    </div>
-                    <div class="col-md-3 col-xs-3">
-                      <a href="#" class="btn btn-white">Assign</a>
-                    </div>
-                  </div>
-                  <div class=" wk-progress tm-membr">
-                    <div class="col-md-2 col-xs-2">
-                      <div class="tm-avatar">
-                        <img src="images/avatar-mini-2.jpg" alt="">
-                      </div>
-                    </div>
-                    <div class="col-md-7 col-xs-7">
-                      <span class="tm">John Boltana</span>
-                    </div>
-                    <div class="col-md-3 col-xs-3">
-                      <a href="#" class="btn btn-white">Assign</a>
-                    </div>
-                  </div>
-                  <div class=" wk-progress tm-membr">
-                    <div class="col-md-2 col-xs-2">
-                      <div class="tm-avatar">
-                        <img src="images/avatar-mini-3.jpg" alt="">
-                      </div>
-                    </div>
-                    <div class="col-md-7 col-xs-7">
-                      <span class="tm">John Boltana</span>
-                    </div>
-                    <div class="col-md-3 col-xs-3">
-                      <a href="#" class="btn btn-white">Assign</a>
-                    </div>
-                  </div>
-                  <div class=" wk-progress tm-membr">
-                    <div class="col-md-2 col-xs-2">
-                      <div class="tm-avatar">
-                        <img src="images/avatar-mini-4.jpg" alt="">
-                      </div>
-                    </div>
-                    <div class="col-md-7 col-xs-7">
-                      <span class="tm">John Boltana</span>
+                      <span class="tm">{{ employee.fullName }}</span>
                     </div>
                     <div class="col-md-3 col-xs-3">
                       <a href="#" class="btn btn-white">Assign</a>

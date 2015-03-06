@@ -5,7 +5,7 @@
 'use strict';
 
 angular.module('projects.services', [ ])
-  .service('ProjectService', function(NotificationService, Restangular, ClientService) {
+  .service('ProjectService', function(NotificationService, Restangular, ClientService, $q) {
 
     var projects = [ ];
     var API = Restangular.all('projects');
@@ -13,25 +13,40 @@ angular.module('projects.services', [ ])
     var projectsReq = API.getList();
     projects = projectsReq.$object;
 
-    var clientAdding = projectsReq.then(function() {
+    var populateProjects = projectsReq.then(function() {
       for(var i = 0; i < projects.length; i++) {
         (function() {
+          var promises = [ ];
           var singleProject = projects[i];
-          return ClientService.get.byId(singleProject.clientId).then(function(client) {
-            singleProject.client = client;
-          });
+          promises[0] = ClientService.get.byId(singleProject.clientId);
+          for(var j = 0; j < singleProject.employeesId.length; j++) {
+            //TODO: CHANGE CLIENTS TO EMPLOYEES
+            promises.push(ClientService.get.byId(singleProject.employeesId[j]));
+          }
+
+          $q.all(promises).then(function(resp) {
+            singleProject.client = { };
+            singleProject.employees = [ ];
+
+            singleProject.client = resp[0];
+
+            for(var k = 1; k < resp.length; k++) {
+              singleProject.employees.push(resp[k]);
+            }
+          })
+
         })();
       }
     });
 
     this.get = {
       all: function() {
-        return clientAdding.then(function() {
+        return populateProjects.then(function() {
           return projects;
         });
       },
       byId: function(id) {
-        return clientAdding.then(function() {
+        return populateProjects.then(function() {
           for(var i = 0; i < projects.length; i++) {
             if(projects[i].id === id) {
               return projects[i];
@@ -43,12 +58,12 @@ angular.module('projects.services', [ ])
 
     this.edit = function(project, origProject) {
       Restangular.copy(project, origProject);
-
+//TODO ON EDIT UPDATE EMPLOYEE
       origProject.put().then(function() {
         ClientService.get.byId(origProject.clientId).then(function(client) {
           origProject.client = client;
         });
-        
+
         NotificationService.Project.edit.success(origProject);
       }, function error() {
         NotificationService.Project.edit.error();
