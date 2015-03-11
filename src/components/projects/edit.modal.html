@@ -2,7 +2,7 @@
   <button type="button" class="close" ng-click="close()" aria-hidden="true">
     <i class="pg-close fs-14"></i>
   </button>
-  <h5>{{ project.name }} <span class="semi-bold">bearbeiten</span></h5>
+  <h5>{{ origProject.name }} <span class="semi-bold">bearbeiten</span></h5>
   <p>Hier können sie ein neues Projekt anlegen.</p>
 </div>
 <form class="form-default" role="form" ng-submit="save()">
@@ -27,7 +27,7 @@
         <div class="col-sm-12">
           <div class="form-group form-group-default form-group-default-select2">
             <label>Mitarbeiter</label><!-- TODO: REMOVE CLIENT AND ADD EMPLOYEE -->
-            <select class="full-width" ng-model="project.employeesId" multiple="multiple" select2-promise ng-options="client.id as client.fullName for client in clients">
+            <select class="full-width" ng-model="project.employeesId" multiple="multiple" select2-promise ng-options="employee.id as employee.fullName for employee in employees">
             </select>
           </div>
         </div>

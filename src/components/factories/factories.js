@@ -70,6 +70,33 @@ angular.module('factories', [ ])
         }
       }
     };
+
+    this.Employee = {
+      edit: {
+        success: function(employee) {
+          pgNotificationService.success('Der Mitarbeiter ' + employee.fullName + ' wurde erfolgreich bearbeitet.');
+        },
+        error: function() {
+          pgNotificationService.error('Bei dem bearbeiten des Mitarbeiters ist ein Fehler aufgetreten, bitte versuchen Sie es erneut.');
+        }
+      },
+      new: {
+        success: function(employee) {
+          pgNotificationService.success('Der Mitarbeiter ' + employee.fullName + ' wurde erfolgreich erstellt.');
+        },
+        error: function() {
+          pgNotificationService.error('Bei dem anlegen des Mitarbeiters ist ein Fehler aufgetreten, bitte versuchen Sie es erneut.');
+        }
+      },
+      delete: {
+        success: function(employee) {
+          pgNotificationService.success('Der Mitarbeiter ' + employee.fullName + ' wurde erfolgreich gelöscht.');
+        },
+        error: function() {
+          pgNotificationService.success('Bei dem löschen des Mitarbeiters ist ein Fehler aufgetreten, bitte versuchen Sie es erneut.');
+        }
+      }
+    };
   })
   .service('pgNotificationService', function() {
     this.success = function(message) {

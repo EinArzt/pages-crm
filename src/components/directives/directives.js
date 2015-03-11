@@ -89,20 +89,33 @@ angular.module('directives', [ ])
       }
     };
   })
-  .directive('toggleSidebarPin', function(UtilService) {
+  .directive('toggleSidebarPin', function(UtilService, localStorageService) {
     return {
       restrict: 'A',
       link: function (scope, element) {
 
         var _body = jQuery('body');
 
+        var savedState = localStorageService.get('PAGES_SIDEBAR_PIN');
+
+        if(savedState == '1' && !(_body.hasClass('menu-pin'))) {
+          _body.addClass('menu-pin');
+        } else if(savedState == '0') {
+          _body.removeClass('menu-pin');
+        }
+
         element.on('click', function(e) {
           e.preventDefault();
 
           if (_body.hasClass('mobile') || UtilService.isVisibleXs() || UtilService.isVisibleSm()) {
             _body.removeClass('menu-pin');
+            localStorageService.set('PAGES_SIDEBAR_PIN', '0');
+          } else if(_body.hasClass('menu-pin')) {
+            _body.removeClass('menu-pin');
+            localStorageService.set('PAGES_SIDEBAR_PIN', '0');
           } else {
-            _body.toggleClass('menu-pin');
+            _body.addClass('menu-pin');
+            localStorageService.set('PAGES_SIDEBAR_PIN','1');
           }
         });
       }

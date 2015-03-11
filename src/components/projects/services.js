@@ -5,7 +5,7 @@
 'use strict';
 
 angular.module('projects.services', [ ])
-  .service('ProjectService', function(NotificationService, Restangular, ClientService, $q) {
+  .service('ProjectService', function(NotificationService, Restangular, ClientService, ModelService) {
 
     var projects = [ ];
     var API = Restangular.all('projects');
@@ -15,27 +15,7 @@ angular.module('projects.services', [ ])
 
     var populateProjects = projectsReq.then(function() {
       for(var i = 0; i < projects.length; i++) {
-        (function() {
-          var promises = [ ];
-          var singleProject = projects[i];
-          promises[0] = ClientService.get.byId(singleProject.clientId);
-          for(var j = 0; j < singleProject.employeesId.length; j++) {
-            //TODO: CHANGE CLIENTS TO EMPLOYEES
-            promises.push(ClientService.get.byId(singleProject.employeesId[j]));
-          }
-
-          $q.all(promises).then(function(resp) {
-            singleProject.client = { };
-            singleProject.employees = [ ];
-
-            singleProject.client = resp[0];
-
-            for(var k = 1; k < resp.length; k++) {
-              singleProject.employees.push(resp[k]);
-            }
-          })
-
-        })();
+        ModelService.import.toProject(projects[i]);
       }
     });
 
@@ -56,32 +36,27 @@ angular.module('projects.services', [ ])
       }
     };
 
-    this.edit = function(project, origProject) {
-      Restangular.copy(project, origProject);
-//TODO ON EDIT UPDATE EMPLOYEE
-      origProject.put().then(function() {
-        ClientService.get.byId(origProject.clientId).then(function(client) {
-          origProject.client = client;
-        });
+    this.edit = function(newProject, project) {
+      Restangular.copy(newProject, project);
 
-        NotificationService.Project.edit.success(origProject);
-      }, function error() {
+      project.put().then(function() {
+        ModelService.import.toProject(project);
+
+        NotificationService.Project.edit.success(project);
+      })
+        .catch(function() {
         NotificationService.Project.edit.error();
       });
     };
 
     this.new = function(project) {
-      console.log(project);
-      console.log(project.employees);
-      console.log(project.client);
       API.post(project).then(function(project) {
-        ClientService.get.byId(project.clientId).then(function(client) {
-          project.client = client;
-          projects.push(project);
-        });
+        ModelService.import.toProject(project);
+        projects.push(project);
 
         NotificationService.Project.new.success(project);
-      }).catch(function(e) {
+      })
+        .catch(function(e) {
         NotificationService.Project.new.error();
       });
 
@@ -94,7 +69,8 @@ angular.module('projects.services', [ ])
         if (index > -1) projects.splice(index, 1);
 
         NotificationService.Project.delete.success(project);
-      }, function error() {
+      })
+        .catch(function() {
         NotificationService.Project.delete.error();
       });
 

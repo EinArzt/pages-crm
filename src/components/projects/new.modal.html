@@ -29,7 +29,7 @@
           <div class="form-group form-group-default form-group-default-select2">
             <label>Mitarbeiter</label>
             <select class="full-width" ng-model="project.employeesId" multiple="multiple" select2>
-              <option ng-repeat="client in clients" value="{{ client.id }}">{{ client.fullName }}</option>
+              <option ng-repeat="employee in employees" value="{{ employee.id }}">{{ employee.fullName }}</option>
             </select>
           </div>
         </div>

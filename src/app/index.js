@@ -9,10 +9,13 @@ angular.module('pages', [
   'ui.router',
   'ui.bootstrap',
   'ui.select',
+  'LocalStorageModule',
   'clients',
   'directives',
   'factories',
-  'projects'
+  'projects',
+  'employees',
+  'base.services'
   ])
   .config(function(RestangularProvider) {
     RestangularProvider.setBaseUrl('http://localhost:2403/');
@@ -46,6 +49,11 @@ angular.module('pages', [
       .state('base.project.activity', {
         url: '/activity',
         templateUrl: 'components/projects/single.activity.html'
+      })
+      .state('base.employees', {
+        url: '/employees',
+        templateUrl: 'components/employees/list.html',
+        controller: 'EmployeesCtrl as EmployeesCtrl'
       });
 
     $urlRouterProvider.otherwise('/404');
