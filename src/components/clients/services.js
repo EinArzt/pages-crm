@@ -11,7 +11,7 @@ angular.module('clients.services', [ ])
     var API = Restangular.all('clients');
 
     var clientsReq = API.getList();
-    var clients = clientsReq.$object;
+    clients = clientsReq.$object;
 
     this.get = {
       all: function() {

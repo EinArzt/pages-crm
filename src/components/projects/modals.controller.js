@@ -5,12 +5,17 @@
 'use strict';
 
 angular.module('projects.modals', [ ])
-  .controller('ProjectModalCtrl', function ($scope, $modal, ClientService, EmployeeService) {
+  .controller('ProjectModalCtrl', function ($scope, $modal, ClientService, EmployeeService, ConfigService) {
 
     var clients = ClientService.get.all();
     var employees = [ ];
+    var config = { };
     EmployeeService.get.all().then(function(resp) {
       employees = resp;
+    });
+
+    ConfigService.get.all().then(function(resp) {
+      config = resp;
     });
 
     this.edit = function (project) {
@@ -28,6 +33,9 @@ angular.module('projects.modals', [ ])
           },
           employees: function() {
             return employees;
+          },
+          config: function() {
+            return config;
           }
         }
       });
@@ -45,18 +53,22 @@ angular.module('projects.modals', [ ])
           },
           employees: function() {
             return employees;
+          },
+          config: function() {
+            return config;
           }
         }
       });
     };
   })
-  .controller('ProjectEditModalCtrl', function ($scope, $modalInstance, ProjectService, project, clients, employees) {
+  .controller('ProjectEditModalCtrl', function ($scope, $modalInstance, ProjectService, project, clients, employees, config) {
 
     $scope.origProject = project;
     $scope.project = angular.copy(project);
 
     $scope.employees = employees;
     $scope.clients = clients;
+    $scope.wages = config.wages;
 
     $scope.save = function () {
       ProjectService.edit($scope.project, $scope.origProject);
@@ -73,11 +85,17 @@ angular.module('projects.modals', [ ])
     };
 
   })
-  .controller('ProjectNewModalCtrl', function ($scope, $modalInstance, ProjectService, clients, employees) {
+  .controller('ProjectNewModalCtrl', function ($scope, $modalInstance, ProjectService, clients, employees, config) {
 
     $scope.project = { };
     $scope.clients = clients;
     $scope.employees = employees;
+    $scope.project.wages = angular.copy(config.wages);
+    $scope.wages = config.wages;
+
+    angular.forEach($scope.project.wages, function(wage) {
+      delete wage.name;
+    });
 
     $scope.save = function () {
       ProjectService.new($scope.project);

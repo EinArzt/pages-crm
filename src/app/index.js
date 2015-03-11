@@ -1,7 +1,7 @@
 'use strict';
 
+// TODO: REMOVED ngAnimate;
 angular.module('pages', [
-  'ngAnimate',
   'ngCookies',
   'ngTouch',
   'ngSanitize',
@@ -15,7 +15,8 @@ angular.module('pages', [
   'factories',
   'projects',
   'employees',
-  'base.services'
+  'base.services',
+  'config'
   ])
   .config(function(RestangularProvider) {
     RestangularProvider.setBaseUrl('http://localhost:2403/');
@@ -30,6 +31,11 @@ angular.module('pages', [
         url: '/',
         templateUrl: 'components/overview/overview.html',
         controller: 'MainCtrl'
+      })
+      .state('base.config', {
+        url: '/config',
+        templateUrl: 'components/configs/config.html',
+        controller: 'ConfigCtrl as ConfigCtrl'
       })
       .state('base.clients', {
         url: '/clients',

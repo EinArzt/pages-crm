@@ -97,6 +97,35 @@ angular.module('factories', [ ])
         }
       }
     };
+
+    this.Config = {
+      wages: {
+        edit: {
+          success: function() {
+            pgNotificationService.success('Alle Lohngruppen wurden erfolgreich gespeichert.');
+          },
+          error: function() {
+            pgNotificationService.error('Bei dem speichern der Lohngruppen ist ein Fehler aufgetreten, bitte versuchen Sie es erneut.');
+          }
+        },
+        add: {
+          success: function() {
+            pgNotificationService.success('Die Lohngruppe wurde erfolgreich erstellt.');
+          },
+          error: function() {
+            pgNotificationService.error('Bei dem hinzufügen der Lohngruppe ist ein Fehler aufgetreten, bitte versuchen Sie es erneut.');
+          }
+        },
+        delete: {
+          success: function() {
+            pgNotificationService.success('Die Lohngruppe wurde erfolgreich gelöscht.');
+          },
+          error: function() {
+            pgNotificationService.success('Bei dem löschen der Lohngruppe ist ein Fehler aufgetreten, bitte versuchen Sie es erneut.');
+          }
+        }
+      }
+    }
   })
   .service('pgNotificationService', function() {
     this.success = function(message) {
