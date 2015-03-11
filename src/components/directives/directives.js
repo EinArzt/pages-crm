@@ -4,7 +4,7 @@
 
 'use strict';
 
-angular.module('directives', [ 'ng-currency' ])
+angular.module('directives', [ 'ng-currency', 'nouislider' ])
   .constant('Modernizr', Modernizr)
   .directive('hoverClass', function (Modernizr, UtilService) {
     return {
