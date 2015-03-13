@@ -5,7 +5,7 @@
 'use strict';
 
 angular.module('projects.services', [ ])
-  .service('ProjectService', function(NotificationService, Restangular, ClientService, ModelService) {
+  .service('ProjectService', function(NotificationService, Restangular, ClientService, ModelService, $state) {
 
     var projects = [ ];
     var API = Restangular.all('projects');
@@ -67,6 +67,8 @@ angular.module('projects.services', [ ])
       project.remove().then(function() {
         var index = projects.indexOf(project);
         if (index > -1) projects.splice(index, 1);
+
+        $state.transitionTo('base.projects');
 
         NotificationService.Project.delete.success(project);
       })

@@ -68,7 +68,6 @@ angular.module('projects.modals', [ ])
 
     $scope.employees = employees;
     $scope.clients = clients;
-    $scope.config = angular.copy(config);
 
     $scope.save = function () {
       ProjectService.edit($scope.project, $scope.origProject);
@@ -95,10 +94,6 @@ angular.module('projects.modals', [ ])
 
     //TODO $scope.project.markup = angular.copy(config.markup);
     $scope.project.markup = "20";
-
-    angular.forEach($scope.project.wages, function(wage) {
-      delete wage.name;
-    });
 
     $scope.save = function () {
       ProjectService.new($scope.project);

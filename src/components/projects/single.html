@@ -150,40 +150,22 @@
                   </div>
                 </div>
                 <div class="prf-box">
-                  <h3 class="prf-border-head">performance status</h3>
-                  <div class=" wk-progress pf-status">
-                    <div class="col-md-8 col-xs-8">Total Product Sales</div>
+                  <h3 class="prf-border-head">Lohngruppen</h3>
+                  <div class=" wk-progress pf-status" ng-repeat="wage in ProjectCtrl.project.wages">
+                    <div class="col-md-8 col-xs-8">{{ wage.name }}</div>
                     <div class="col-md-4 col-xs-4">
-                      <strong>23545</strong>
-                    </div>
-                  </div>
-                  <div class=" wk-progress pf-status">
-                    <div class="col-md-8 col-xs-8">Total Product Refer</div>
-                    <div class="col-md-4 col-xs-4">
-                      <strong>235</strong>
-                    </div>
-                  </div>
-                  <div class=" wk-progress pf-status">
-                    <div class="col-md-8 col-xs-8">Total Earn</div>
-                    <div class="col-md-4 col-xs-4">
-                      <strong>235452344$</strong>
+                      <strong>{{ wage.wage }}€</strong>
                     </div>
                   </div>
                 </div>
                 <div class="prf-box">
-                  <h3 class="prf-border-head">team members</h3>
+                  <h3 class="prf-border-head">Mitarbeiter</h3>
                   <div class=" wk-progress tm-membr" ng-repeat="employee in ProjectCtrl.project.employees">
-                    <div class="col-md-2 col-xs-2">
-                      <div class="tm-avatar">
-                        <img src="images/lock_thumb.jpg" alt="">
-                      </div>
+                    <div class="col-md-6 col-xs-6">{{ employee.fullName }}</div>
+                    <div class="col-md-6 col-xs-6">
+                      <strong>{{ employee.position }}</strong>
                     </div>
-                    <div class="col-md-7 col-xs-7">
-                      <span class="tm">{{ employee.fullName }}</span>
-                    </div>
-                    <div class="col-md-3 col-xs-3">
-                      <a href="#" class="btn btn-white">Assign</a>
-                    </div>
+
                   </div>
                 </div>
               </div>

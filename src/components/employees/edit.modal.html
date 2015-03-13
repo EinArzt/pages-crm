@@ -68,12 +68,9 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="form-group form-group-default form-group-default-select2 required">
-            <label>Position im Betrieb</label><!-- TODO: BUG: Die erste Option wird pre-selected aber ist dann nicht im model -->
-            <select class="full-width" ng-model="employee.position" select2-promise>
-              <option value="Auszubildender">Auszubildender</option>
-              <option value="Helfer">Helfer</option>
-              <option value="Mitarbeiter">Mitarbeiter</option>
-              <option value="Betriebsleiter">Betriebsleiter</option>
+            <label>Position im Betrieb</label>
+            <!-- TODO: IMPORTANT BUG! IF WAGE.NAME CHANGES IN SETTINGS, EMPLOYEES LOSE POSITION -->
+            <select class="full-width" ng-model="employee.position" select2-promise required ng-options="wage.name as wage.name for wage in config.wages">
             </select>
           </div>
         </div>

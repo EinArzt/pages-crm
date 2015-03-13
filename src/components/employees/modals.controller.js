@@ -5,7 +5,13 @@
 'use strict';
 
 angular.module('employees.modals', [ ])
-  .controller('EmployeeModalCtrl', function ($scope, $modal) {
+  .controller('EmployeeModalCtrl', function ($scope, $modal, ConfigService) {
+
+    var config = { };
+
+    ConfigService.get.all().then(function(resp) {
+      config = resp;
+    });
 
     this.edit = function (employee) {
 
@@ -16,6 +22,9 @@ angular.module('employees.modals', [ ])
         resolve: {
           employee: function () {
             return employee;
+          },
+          config: function() {
+            return config;
           }
         }
       });
@@ -26,14 +35,20 @@ angular.module('employees.modals', [ ])
       $modal.open({
         templateUrl: 'components/employees/new.modal.html',
         controller: 'EmployeeNewModalCtrl',
-        windowClass: 'stick-up'
+        windowClass: 'stick-up',
+        resolve: {
+          config: function() {
+            return config;
+          }
+        }
       });
     };
   })
-  .controller('EmployeeEditModalCtrl', function ($scope, $modalInstance, EmployeeService, employee) {
+  .controller('EmployeeEditModalCtrl', function ($scope, $modalInstance, EmployeeService, employee, config) {
 
     $scope.origEmployee = employee;
     $scope.employee = angular.copy(employee);
+    $scope.config = config;
 
     $scope.save = function () {
       EmployeeService.edit($scope.employee, $scope.origEmployee);
@@ -49,9 +64,10 @@ angular.module('employees.modals', [ ])
       $modalInstance.dismiss('cancel');
     }
   })
-  .controller('EmployeeNewModalCtrl', function ($scope, $modalInstance, EmployeeService) {
+  .controller('EmployeeNewModalCtrl', function ($scope, $modalInstance, EmployeeService, config) {
 
     $scope.employee = { };
+    $scope.config = config;
 
     $scope.save = function () {
       EmployeeService.new($scope.employee);
