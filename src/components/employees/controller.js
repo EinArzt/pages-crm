@@ -11,10 +11,7 @@ angular.module('employees', [ 'employees.services', 'employees.modals' ])
     this.search = "";
     this.employees = [ ];
 
-    EmployeeService.get.all().then(function(employees) {
-      _this.employees = employees;
-    })
-      .catch(function(e) {
-        alert('error');
-      });
+    EmployeeService.getList().then(function(resp) {
+      _this.employees = resp;
+    });
   });

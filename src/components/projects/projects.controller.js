@@ -12,25 +12,19 @@ angular.module('projects', [ 'projects.services', 'projects.modals' ])
     this.projects = [ ];
     this.search = "";
 
-    ProjectService.get.all().then(function(projects) {
+    ProjectService.getList().then(function(projects) {
       _this.projects = projects;
-    })
-      .catch(function(e) {
-        alert('error');
-      });
+    });
 
   })
-  .controller('ProjectCtrl', function($scope, ProjectService, $stateParams, $rootScope) {
+  .controller('ProjectCtrl', function($scope, ProjectService, $stateParams) {
 
     var _this = this;
     var stateParams = $stateParams.projectId;
 
     this.projects = [ ];
 
-    ProjectService.get.byId(stateParams).then(function(project) {
+    ProjectService.find(stateParams).then(function(project) {
       _this.project = project;
-    })
-      .catch(function(e) {
-        alert('error');
-      });
+    });
   });

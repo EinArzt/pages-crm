@@ -10,7 +10,7 @@ angular.module('clients.modals', [ ])
     this.edit = function (client) {
 
       $modal.open({
-        templateUrl: 'components/clients/edit.modal.html',
+        templateUrl: 'components/clients/modals/edit.modal.html',
         controller: 'ClientEditModalCtrl',
         windowClass: 'stick-up',
         resolve: {
@@ -24,7 +24,7 @@ angular.module('clients.modals', [ ])
     this.new = function () {
 
       $modal.open({
-        templateUrl: 'components/clients/new.modal.html',
+        templateUrl: 'components/clients/modals/new.modal.html',
         controller: 'ClientNewModalCtrl',
         windowClass: 'stick-up'
       });

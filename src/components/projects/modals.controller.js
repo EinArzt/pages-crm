@@ -7,10 +7,15 @@
 angular.module('projects.modals', [ ])
   .controller('ProjectModalCtrl', function ($scope, $modal, ClientService, EmployeeService, ConfigService) {
 
-    var clients = ClientService.get.all();
+    var clients = [ ];
     var employees = [ ];
     var config = { };
-    EmployeeService.get.all().then(function(resp) {
+
+    ClientService.getList().then(function(resp) {
+      clients = resp;
+    });
+
+    EmployeeService.getList().then(function(resp) {
       employees = resp;
     });
 

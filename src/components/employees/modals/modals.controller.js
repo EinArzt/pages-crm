@@ -16,7 +16,7 @@ angular.module('employees.modals', [ ])
     this.edit = function (employee) {
 
       $modal.open({
-        templateUrl: 'components/employees/edit.modal.html',
+        templateUrl: 'components/employees/modals/edit.modal.html',
         controller: 'EmployeeEditModalCtrl',
         windowClass: 'stick-up',
         resolve: {
@@ -33,7 +33,7 @@ angular.module('employees.modals', [ ])
     this.new = function () {
 
       $modal.open({
-        templateUrl: 'components/employees/new.modal.html',
+        templateUrl: 'components/employees/modals/new.modal.html',
         controller: 'EmployeeNewModalCtrl',
         windowClass: 'stick-up',
         resolve: {

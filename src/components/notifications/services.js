@@ -4,7 +4,7 @@
 
 'use strict';
 
-angular.module('factories', [ ])
+angular.module('notifications', [ ])
   .service('UtilService', function() {
     this.isVisibleXs = function() {
       (!jQuery('#pg-visible-xs').length) && jQuery('body').append('<div id="pg-visible-xs" class="visible-xs" />');
@@ -17,7 +17,7 @@ angular.module('factories', [ ])
     };
   })
   .service('NotificationService', function(pgNotificationService) {
-    this.Client = {
+    this.clients = {
       edit: {
         success: function(client) {
           pgNotificationService.success('Der Kunde ' + client.fullName + ' wurde erfolgreich bearbeitet.');
@@ -71,7 +71,7 @@ angular.module('factories', [ ])
       }
     };
 
-    this.Employee = {
+    this.employees = {
       edit: {
         success: function(employee) {
           pgNotificationService.success('Der Mitarbeiter ' + employee.fullName + ' wurde erfolgreich bearbeitet.');
@@ -130,23 +130,23 @@ angular.module('factories', [ ])
   .service('pgNotificationService', function() {
     this.success = function(message) {
       $('body').pgNotification({
-        style: 'flip',
+        style: 'simple',
         message: message,
         position: 'top-right',
         type: 'success',
         showClose: true,
-        timeout: 6000
+        timeout: 8000
       }).show();
     };
 
     this.error = function(message) {
       $('body').pgNotification({
-        style: 'flip',
+        style: 'simple',
         message: message,
         position: 'top-right',
         type: 'danger',
         showClose: true,
-        timeout: 6000
+        timeout: 8000
       }).show();
     };
   });

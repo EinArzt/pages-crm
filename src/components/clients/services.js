@@ -5,69 +5,44 @@
 'use strict';
 
 angular.module('clients.services', [ ])
-  .service('ClientService', function(NotificationService, Restangular) {
+  .service('ClientService', function(APIService, HelperService) {
 
-    var clients = [ ];
-    var API = Restangular.all('clients');
+    var name = 'clients';
+    var models = [ ];
 
-    var clientsReq = API.getList();
-    clients = clientsReq.$object;
+    var APIReq = APIService.getList(name).then(function(resp) {
+      models = resp;
+    });
 
-    this.get = {
-      all: function() {
-        return clients;
-      },
-      byId: function(id) {
-        return clientsReq.then(function() {
-          for(var i = 0; i < clients.length; i++) {
-            if(clients[i].id === id) {
-              return clients[i];
-            }
-          }
-        });
-      }
-    };
-
-    this.edit = function(client, origClient) {
-      Restangular.copy(client, origClient);
-      origClient.fullName = client.name + ' ' + client.lastName;
-      origClient.address = client.street + ', ' + client.zipcode + ' ' + client.city;
-
-      origClient.put().then(function() {
-        NotificationService.Client.edit.success(origClient);
-      }, function error() {
-        NotificationService.Client.edit.error();
+    this.getList = function() {
+      return APIReq.then(function() {
+        return models;
       });
     };
 
-    this.new = function(client) {
-      var temp = Restangular.copy(client);
-
-      client.fullName = client.name + ' ' + client.lastName;
-      client.address = client.street + ', ' + client.zipcode + ' ' + client.city;
-
-      API.post(client).then(function(resp) {
-        clients.push(resp);
-
-        NotificationService.Client.new.success(client);
-      }).catch(function(e) {
-        client.fullName = temp.fullName;
-        client.address = temp.address;
-
-        NotificationService.Client.new.error();
+    this.find = function(id) {
+      return APIReq.then(function() {
+        return HelperService.find(id, models);
       });
-
-      //$rootScope.$broadcast('CLIENTS_UPDATE');
     };
 
-    this.delete = function(client) {
-      client.remove().then(function() {
-        var index = clients.indexOf(client);
-        if (index > -1) clients.splice(index, 1);
+    this.edit = function(updatedModel, model) {
+      APIService.update(name, updatedModel, model).then(function(resp) {
+        return resp;
+      });
+    };
 
-        NotificationService.Client.delete.success(client);
-      }, function error() {
-        NotificationService.Client.delete.error();
+    //TODO: SERVER SIDE fullName and address Generation // Currently in Deployd but in Laravel TODO too
+    this.new = function(model) {
+      APIService.create(name, model).then(function(resp) {
+        models.push(resp);
+      });
+    };
+
+    this.delete = function(model) {
+      APIService.remove(name, model).then(function() {
+        var index = models.indexOf(model);
+        if (index > -1) models.splice(index, 1);
       });
 
       //TODO Add Papierkorb so that clients dont get deleted immediately only after 30 days.

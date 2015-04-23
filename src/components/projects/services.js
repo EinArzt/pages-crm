@@ -5,77 +5,61 @@
 'use strict';
 
 angular.module('projects.services', [ ])
-  .service('ProjectService', function(NotificationService, Restangular, ClientService, ModelService, $state) {
+  .service('ProjectService', function(NotificationService, Restangular, ClientService, ModelService, $state, APIService, HelperService) {
 
-    var projects = [ ];
-    var API = Restangular.all('projects');
+    var name = 'projects';
+    var models = [ ];
 
-    var projectsReq = API.getList();
-    projects = projectsReq.$object;
-
-    var populateProjects = projectsReq.then(function() {
-      for(var i = 0; i < projects.length; i++) {
-        ModelService.import.toProject(projects[i]);
+    var APIReq = APIService.getList(name).then(function(resp) {
+      models = resp;
+    }).then(function() {
+      for(var i = 0; i < models.length; i++) {
+        populate(models[i]);
       }
     });
 
-    this.get = {
-      all: function() {
-        return populateProjects.then(function() {
-          return projects;
-        });
-      },
-      byId: function(id) {
-        return populateProjects.then(function() {
-          for(var i = 0; i < projects.length; i++) {
-            if(projects[i].id === id) {
-              return projects[i];
-            }
-          }
-        });
-      }
+    var populate = function(model) {
+      model.client = { };
+      model.employees = [ ];
+
+      ModelService.importClient(model);
+      ModelService.importEmployees(model);
     };
 
-    this.edit = function(newProject, project) {
-      Restangular.copy(newProject, project);
-
-      project.put().then(function() {
-        ModelService.import.toProject(project);
-
-        NotificationService.Project.edit.success(project);
-      })
-        .catch(function() {
-        NotificationService.Project.edit.error();
+    this.getList = function() {
+      return APIReq.then(function() {
+        return models;
       });
     };
 
-    this.new = function(project) {
-      API.post(project).then(function(project) {
-        ModelService.import.toProject(project);
-        projects.push(project);
-
-        NotificationService.Project.new.success(project);
-      })
-        .catch(function(e) {
-        NotificationService.Project.new.error();
+    this.find = function(id) {
+      return APIReq.then(function() {
+        return HelperService.find(id, models);
       });
-
-      //$rootScope.$broadcast('CLIENTS_UPDATE');
     };
 
-    this.delete = function(project) {
-      project.remove().then(function() {
-        var index = projects.indexOf(project);
-        if (index > -1) projects.splice(index, 1);
+    this.edit = function(updatedModel, model) {
+      APIService.update(name, updatedModel, model).then(function() {
+        populate(model);
+      });
+    };
 
-        $state.transitionTo('base.projects');
+    //TODO: SERVER SIDE fullName and address Generation // Currently in Deployd but in Laravel TODO too
+    this.new = function(model) {
+      APIService.create(name, model).then(function(resp) {
+        populate(resp);
+        models.push(resp);
+      });
+    };
 
-        NotificationService.Project.delete.success(project);
-      })
-        .catch(function() {
-        NotificationService.Project.delete.error();
+    this.delete = function(model) {
+      APIService.remove(name, model).then(function() {
+        var index = models.indexOf(model);
+        if (index > -1) models.splice(index, 1);
+
+        $state.go('base.projects');
       });
 
-      //TODO Add Papierkorb so that projects dont get deleted immediately only after 30 days.
+      //TODO Add Papierkorb so that clients dont get deleted immediately only after 30 days.
     };
   });

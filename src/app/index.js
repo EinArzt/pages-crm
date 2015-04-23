@@ -12,11 +12,15 @@ angular.module('pages', [
   'LocalStorageModule',
   'clients',
   'directives',
-  'factories',
+  'notifications',
   'projects',
   'employees',
   'base.services',
-  'config'
+  'config',
+  'articles',
+  'suppliers',
+  'api',
+  'helper'
   ])
   .config(function(RestangularProvider) {
     RestangularProvider.setBaseUrl('http://localhost:2403/');
@@ -25,7 +29,7 @@ angular.module('pages', [
     $stateProvider
       .state('base', {
         abstract: true,
-        templateUrl: 'components/base/base.html',
+        templateUrl: 'app/main/main.html'
       })
       .state('base.overview', {
         url: '/',
@@ -60,6 +64,16 @@ angular.module('pages', [
         url: '/employees',
         templateUrl: 'components/employees/list.html',
         controller: 'EmployeesCtrl as EmployeesCtrl'
+      })
+      .state('base.articles', {
+        url: '/articles',
+        templateUrl: 'components/articles/list.html',
+        controller: 'ArticleCtrl as ArticleCtrl'
+      })
+      .state('base.suppliers', {
+        url: '/suppliers',
+        templateUrl: 'components/suppliers/list.html',
+        controller: 'SupplierCtrl as SupplierCtrl'
       });
 
     $urlRouterProvider.otherwise('/404');
