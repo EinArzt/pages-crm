@@ -53,20 +53,24 @@
         <thead>
         <tr>
           <th style="width: 30%;">Kunde</th>
-          <th style="width: 40%;">Name</th>
-          <th style="width: 30%;">Telefonnummern</th>
+          <th style="width: 45%;">Name</th>
+          <th style="width: 25%;">Telefonnummern</th>
         </tr>
         <tr>
           <th>
             <button class="btn btn-primary" ng-click="ProjectModals.new()">Neues Projekt</button>
           </th>
-          <th colspan="10">
+          <th ng-controller="PaginationCtrl as PaginationCtrl">
+            <dir-pagination-controls max-size="7" ng-if="PaginationCtrl.greaterSmall()"></dir-pagination-controls>
+            <dir-pagination-controls ng-if="!PaginationCtrl.greaterSmall()" template-url="components/pagination/small.html"></dir-pagination-controls>
+          </th>
+          <th>
             <input placeholder="Suchen..." class="input-sm form-control" type="search" ng-model="ProjectsCtrl.search" />
           </th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="project in ProjectsCtrl.projects | filter: ProjectsCtrl.search | orderBy: 'name'" ui-sref="base.project({projectId: project.id})" class="pointer">
+        <tr dir-paginate="project in ProjectsCtrl.projects | filter: ProjectsCtrl.search | itemsPerPage: 10 | orderBy: 'name'" ui-sref="base.project({projectId: project.id})" class="pointer">
           <td>{{ project.client.fullName }}</td>
           <td>{{ project.name }}</td>
           <td></td>

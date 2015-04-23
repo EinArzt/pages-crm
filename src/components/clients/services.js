@@ -27,9 +27,7 @@ angular.module('clients.services', [ ])
     };
 
     this.edit = function(updatedModel, model) {
-      APIService.update(name, updatedModel, model).then(function(resp) {
-        return resp;
-      });
+      APIService.update(name, updatedModel, model);
     };
 
     //TODO: SERVER SIDE fullName and address Generation // Currently in Deployd but in Laravel TODO too

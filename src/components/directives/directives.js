@@ -6,7 +6,7 @@
 
 angular.module('directives', [ 'ng-currency', 'nouislider' ])
   .constant('Modernizr', Modernizr)
-  .directive('hoverClass', function (Modernizr, UtilService) {
+  .directive('hoverClass', function (Modernizr, HelperService) {
     return {
       restrict: 'A',
       scope: {
@@ -27,7 +27,7 @@ angular.module('directives', [ 'ng-currency', 'nouislider' ])
         var menuClosedCSS = (css3d == true ? 'translate3d(0, 0,0)' : 'translate(0, 0)');
 
         element.on('mouseenter', function() {
-          if (UtilService.isVisibleSm() || UtilService.isVisibleXs()) {
+          if (HelperService.isVisibleSm() || HelperService.isVisibleXs()) {
             return false
           }
           if (_body.hasClass('menu-pin'))
@@ -48,7 +48,7 @@ angular.module('directives', [ 'ng-currency', 'nouislider' ])
         });
 
         element.on('mouseleave', function() {
-          if (UtilService.isVisibleSm() || UtilService.isVisibleXs()) {
+          if (HelperService.isVisibleSm() || HelperService.isVisibleXs()) {
             return false
           }
 
@@ -89,7 +89,7 @@ angular.module('directives', [ 'ng-currency', 'nouislider' ])
       }
     };
   })
-  .directive('toggleSidebarPin', function(UtilService, localStorageService) {
+  .directive('toggleSidebarPin', function(HelperService, localStorageService) {
     return {
       restrict: 'A',
       link: function (scope, element) {
@@ -107,7 +107,7 @@ angular.module('directives', [ 'ng-currency', 'nouislider' ])
         element.on('click', function(e) {
           e.preventDefault();
 
-          if (_body.hasClass('mobile') || UtilService.isVisibleXs() || UtilService.isVisibleSm()) {
+          if (_body.hasClass('mobile') || HelperService.isVisibleXs() || HelperService.isVisibleSm()) {
             _body.removeClass('menu-pin');
             localStorageService.set('PAGES_SIDEBAR_PIN', '0');
           } else if(_body.hasClass('menu-pin')) {

@@ -52,24 +52,28 @@
       <table ng-controller="ClientModalCtrl as ClientModals" class="table table-hover">
         <thead>
         <tr>
-          <th style="width: 25%;">Name</th>
+          <th style="width: 30%;">Name</th>
           <th style="width: 45%;">Adresse</th>
-          <th style="width: 30%;">Telefonnummern</th>
+          <th style="width: 25%;">Telefonnummern</th>
         </tr>
         <tr>
           <th>
             <button ng-click="ClientModals.new()" class="btn btn-primary">Neuer Kunde</button>
           </th>
-          <th colspan="10">
+          <th ng-controller="PaginationCtrl as PaginationCtrl">
+            <dir-pagination-controls max-size="7" ng-if="PaginationCtrl.greaterSmall()"></dir-pagination-controls>
+            <dir-pagination-controls ng-if="!PaginationCtrl.greaterSmall()" template-url="components/pagination/small.html"></dir-pagination-controls>
+          </th>
+          <th>
             <input ng-model="ClientsCtrl.search" placeholder="Suchen..." class="input-sm form-control" type="search" />
           </th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="client in ClientsCtrl.clients | filter: ClientsCtrl.search | orderBy: 'name'" ng-click="ClientModals.edit(client)" class="pointer">
+        <tr dir-paginate="client in ClientsCtrl.clients | filter: ClientsCtrl.search | itemsPerPage: 10 | orderBy: 'name'" ng-click="ClientModals.edit(client)" class="pointer">
           <td>{{ client.fullName }}</td>
           <td>{{ client.address }}</td>
-          <td>{{ client.phone }} | {{ client.mobilePhone }}</td>
+          <td>{{ client.phone }}</td>
         </tr>
         </tbody>
       </table>

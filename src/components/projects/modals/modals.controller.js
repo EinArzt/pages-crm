@@ -26,7 +26,7 @@ angular.module('projects.modals', [ ])
     this.edit = function (project) {
 
       $modal.open({
-        templateUrl: 'components/projects/edit.modal.html',
+        templateUrl: 'components/projects/modals/edit.modal.html',
         controller: 'ProjectEditModalCtrl',
         windowClass: 'stick-up',
         resolve: {
@@ -49,7 +49,7 @@ angular.module('projects.modals', [ ])
     this.new = function () {
 
       $modal.open({
-        templateUrl: 'components/projects/new.modal.html',
+        templateUrl: 'components/projects/modals/new.modal.html',
         controller: 'ProjectNewModalCtrl',
         windowClass: 'stick-up',
         resolve: {

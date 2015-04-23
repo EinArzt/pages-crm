@@ -10,6 +10,7 @@ angular.module('pages', [
   'ui.bootstrap',
   'ui.select',
   'LocalStorageModule',
+  'angularUtils.directives.dirPagination',
   'clients',
   'directives',
   'notifications',
@@ -20,7 +21,8 @@ angular.module('pages', [
   'articles',
   'suppliers',
   'api',
-  'helper'
+  'helper',
+  'pagination'
   ])
   .config(function(RestangularProvider) {
     RestangularProvider.setBaseUrl('http://localhost:2403/');

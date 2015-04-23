@@ -5,17 +5,6 @@
 'use strict';
 
 angular.module('notifications', [ ])
-  .service('UtilService', function() {
-    this.isVisibleXs = function() {
-      (!jQuery('#pg-visible-xs').length) && jQuery('body').append('<div id="pg-visible-xs" class="visible-xs" />');
-      return $('#pg-visible-xs').is(':visible');
-    };
-
-    this.isVisibleSm = function() {
-      (!jQuery('#pg-visible-sm').length) && jQuery('body').append('<div id="pg-visible-sm" class="visible-sm" />');
-      return $('#pg-visible-sm').is(':visible');
-    };
-  })
   .service('NotificationService', function(pgNotificationService) {
     this.clients = {
       edit: {
@@ -44,7 +33,7 @@ angular.module('notifications', [ ])
       }
     };
 
-    this.Project = {
+    this.projects = {
       edit: {
         success: function(project) {
           pgNotificationService.success('Das Projekt ' + project.name + ' wurde erfolgreich bearbeitet.');

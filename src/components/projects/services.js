@@ -62,4 +62,9 @@ angular.module('projects.services', [ ])
 
       //TODO Add Papierkorb so that clients dont get deleted immediately only after 30 days.
     };
+
+    //TODO CREATE IMPORTDEFAULT
+    this.importDefault = function(model) {
+
+    };
   });
