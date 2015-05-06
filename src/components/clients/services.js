@@ -37,6 +37,7 @@ angular.module('clients.services', [ ])
       });
     };
 
+    //TODO MAYBE ADD APIReq.then because it could be not available yet
     this.delete = function(model) {
       APIService.remove(name, model).then(function() {
         var index = models.indexOf(model);

@@ -31,7 +31,7 @@ angular.module('api', [ ])
       Restangular.copy(modifiedObject, object);
 
       return object.put().then(function(resp) {
-        angular.copy(resp, object);
+        Restangular.copy(resp, object);
         NotificationService[name].edit.success(resp);
 
         return object;

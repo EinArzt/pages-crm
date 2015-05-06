@@ -11,6 +11,11 @@ angular.module('clients', [ 'clients.modals', 'clients.services' ])
 
     this.clients = [ ];
     this.search = "";
+    this.limitTo = 20;
+
+    this.loadMore = function() {
+      _this.limitTo += 20;
+    };
 
     ClientService.getList().then(function(resp) {
       _this.clients = resp;

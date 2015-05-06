@@ -16,6 +16,12 @@ angular.module('projects', [ 'projects.services', 'projects.modals' ])
       _this.projects = projects;
     });
 
+    this.limitTo = 20;
+
+    this.loadMore = function() {
+      _this.limitTo += 20;
+    }
+
   })
   .controller('ProjectCtrl', function($scope, ProjectService, $stateParams) {
 

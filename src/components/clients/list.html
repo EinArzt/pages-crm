@@ -1,4 +1,3 @@
-
 <div class="jumbotron" data-pages="parallax">
   <div class="container-fluid container-fixed-lg sm-p-l-20 sm-p-r-20">
     <div class="inner">
@@ -60,17 +59,13 @@
           <th>
             <button ng-click="ClientModals.new()" class="btn btn-primary">Neuer Kunde</button>
           </th>
-          <th ng-controller="PaginationCtrl as PaginationCtrl">
-            <dir-pagination-controls max-size="7" ng-if="PaginationCtrl.greaterSmall()"></dir-pagination-controls>
-            <dir-pagination-controls ng-if="!PaginationCtrl.greaterSmall()" template-url="components/pagination/small.html"></dir-pagination-controls>
-          </th>
-          <th>
+          <th colspan="10">
             <input ng-model="ClientsCtrl.search" placeholder="Suchen..." class="input-sm form-control" type="search" />
           </th>
         </tr>
         </thead>
-        <tbody>
-        <tr dir-paginate="client in ClientsCtrl.clients | filter: ClientsCtrl.search | itemsPerPage: 10 | orderBy: 'name'" ng-click="ClientModals.edit(client)" class="pointer">
+        <tbody infinite-scroll="ClientsCtrl.loadMore()" infinite-scroll-distance="3">
+        <tr ng-repeat="client in ClientsCtrl.clients | filter: ClientsCtrl.search | limitTo: ClientsCtrl.limitTo | orderBy: 'name'" ng-click="ClientModals.edit(client)" class="pointer">
           <td>{{ client.fullName }}</td>
           <td>{{ client.address }}</td>
           <td>{{ client.phone }}</td>
