@@ -21,7 +21,8 @@ angular.module('pages', [
   'suppliers',
   'api',
   'helper',
-  'infinite-scroll'
+  'infinite-scroll',
+  'progress'
   ])
   .config(function(RestangularProvider) {
     RestangularProvider.setBaseUrl('http://localhost:2403/');

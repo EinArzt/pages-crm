@@ -11,16 +11,17 @@ angular.module('projects', [ 'projects.services', 'projects.modals' ])
 
     this.projects = [ ];
     this.search = "";
-
-    ProjectService.getList().then(function(projects) {
-      _this.projects = projects;
-    });
-
     this.limitTo = 20;
+    this.isLoading = true;
 
     this.loadMore = function() {
       _this.limitTo += 20;
     }
+
+    ProjectService.getList().then(function(projects) {
+      _this.projects = projects;
+      _this.isLoading = false;
+    });
 
   })
   .controller('ProjectCtrl', function($scope, ProjectService, $stateParams) {

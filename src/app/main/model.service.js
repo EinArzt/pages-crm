@@ -5,7 +5,7 @@
 'use strict';
 
 angular.module('base.services', [ ])
-  .service('ModelService', function(Restangular, ClientService, $q, EmployeeService) {
+  .service('ModelService', function(ClientService, EmployeeService) {
 
     this.importClient = function(model) {
       ClientService.find(model.clientId).then(function(resp) {
