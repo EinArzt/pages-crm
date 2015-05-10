@@ -13,6 +13,7 @@ angular.module('base.services', [ ])
       });
     };
 
+    //TODO CHECK IF EMPLOYEESID EXISTS / EMPLOYEE IS ASSIGNED TO PROJECT, because there could be a project without Employees
     this.importEmployees = function(model) {
       for(var i = 0; i < model.employeesId.length; i++) {
         EmployeeService.find(model.employeesId[i]).then(function(resp) {

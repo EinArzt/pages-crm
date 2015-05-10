@@ -5,14 +5,14 @@
 'use strict';
 
 angular.module('clients', [ 'clients.modals', 'clients.services' ])
-  .controller('ClientsCtrl', function ($scope, ClientService, $timeout) {
+  .controller('ClientsCtrl', function ($scope, ClientService) {
 
     var _this = this;
 
     this.clients = [ ];
     this.search = "";
-    this.limitTo = 20;
     this.isLoading = true;
+    this.limitTo = 20;
 
     this.loadMore = function() {
       _this.limitTo += 20;

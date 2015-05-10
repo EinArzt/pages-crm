@@ -39,8 +39,8 @@
         <div class="col-md-12">
           <div class="form-group form-group-default">
             <label>Materialaufschlag</label>
-            <div class="bg-master m-t-10 m-l-10 m-r-10 m-b-10" ng-model="project.markup" slider start="0" end="100" step="0.50"></div>
-            <input class="text-center form-control" ng-currency currency-symbol="%" type="text" ng-model="project.markup">
+            <div class="bg-master m-t-10 m-l-10 m-r-10 m-b-10" ng-model="project.markup" slider start="0" end="100" step="1"></div>
+            <input class="text-center form-control" append-symbol="%" type="text" ng-model="project.markup">
           </div>
         </div>
       </div>
@@ -50,7 +50,7 @@
       <div class="col-sm-4" ng-repeat="wage in project.wages">
         <div class="form-group form-group-default input-group">
           <label>{{ wage.name }}</label>
-          <input ng-model="wage.wage" ng-currency currency-symbol="€" type="text" class="form-control" required>
+          <input ng-model="wage.wage" append-symbol="€" type="text" class="form-control" required>
           <span class="input-group-addon">€/std</span>
         </div>
       </div>

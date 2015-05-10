@@ -11,12 +11,12 @@ angular.module('projects', [ 'projects.services', 'projects.modals' ])
 
     this.projects = [ ];
     this.search = "";
-    this.limitTo = 20;
     this.isLoading = true;
+    this.limitTo = 20;
 
     this.loadMore = function() {
       _this.limitTo += 20;
-    }
+    };
 
     ProjectService.getList().then(function(projects) {
       _this.projects = projects;
